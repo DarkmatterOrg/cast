@@ -2,7 +2,7 @@ use crate::args::AutoUpdateArgs;
 use colored::Colorize;
 use std::process::{Command, Stdio};
 
-pub fn toggle_password(args: &AutoUpdateArgs) {
+pub fn toggle_password_feedback(args: &AutoUpdateArgs) {
   if args.status {
     let mut current_status = "Disabled".red().bold();
 

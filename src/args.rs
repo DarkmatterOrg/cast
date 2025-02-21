@@ -29,7 +29,7 @@ pub struct AutoUpdateArgs {
 }
 
 #[derive(Args)]
-pub struct TogglePasswordArgs {
+pub struct TogglePasswordFeedbackArgs {
   /// Get current status
   #[arg(short, long)]
   pub status: bool,
@@ -52,7 +52,7 @@ pub enum Commands {
   ///Clean up old up unused podman images, volumes, flatpak packages and rpm-ostree content
   CleanSystem,
   ///Toggles password prompt feedback in terminal, where sudo password prompts will display asterisks when enabled
-  TogglePassword(TogglePasswordArgs),
+  TogglePasswordFeedback(TogglePasswordFeedbackArgs),
   /// Run an update on user, system or both
   Update(UpdateArgs),
 }

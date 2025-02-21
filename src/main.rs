@@ -7,7 +7,7 @@ use colored::Colorize;
 //use std::path::Path;
 
 use crate::modules::{
-    auto_update::auto_update, bios::bios, clean_system::clean_system, update::update,
+    auto_update::auto_update, bios::bios, clean_system::clean_system, toggle_password_feedback::toggle_password_feedback, update::update,
 };
 
 const VERSION: &str = clap::crate_version!();
@@ -39,8 +39,8 @@ fn main() {
             clean_system();
         }
 
-        Commands::TogglePassword(args) => {
-            //TODO toggle_password(&args);
+        Commands::TogglePasswordFeedback(args) => {
+            //TODO toggle_password_feedback(&args);
         }
 
         Commands::Update(args) => {
