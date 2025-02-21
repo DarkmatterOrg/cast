@@ -1,0 +1,9 @@
+[package]
+name = "cast"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4.5.30", features = ["cargo", "derive", "string"] }
+colored = "3.0.0"
+libc = "0.2.169"
