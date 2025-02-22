@@ -1,43 +1,27 @@
-use crate::args::AutoUpdateArgs;
+use crate::args::TogglePasswordFeedbackArgs;
 use colored::Colorize;
-use std::process::{Command, Stdio};
+use std::fs;
+use std::io::Write;
 
-pub fn toggle_password_feedback(args: &AutoUpdateArgs) {
-  if args.status {
-    let mut current_status = "Disabled".red().bold();
-
-    let current_status_result = Command::new("systemctl")
-      .args(["is-enabled", "umbra-update.timer"])
-      .stdout(Stdio::piped())
-      .output()
-      .unwrap();
-    let get_current_status = String::from_utf8(current_status_result.stdout).unwrap();
-
-    if get_current_status.contains("enabled") {
-      current_status = "Enabled".green().bold();
-    }
-
-    println!("Automatic updates are currently: {}", current_status);
-  }
-
+pub fn toggle_password_feedback(args: &TogglePasswordFeedbackArgs) {
   if args.enable && args.disable {
     eprintln!("{}", "You can't use both --enable and --disable at the same time.".bold().red());
     return;
   }
 
   if args.enable {
-    Command::new("systemctl")
-      .args(["enable", "umbra-update.timer"])
-      .spawn()
-      .expect("Failed to enable auto-updates");
-    println!("Auto Updater have been: {}", "enabled".bold().green());
+    let mut file = fs::File::create("/etc/sudoers.d/enable-pwfeedback").expect("Wasn't able to create file");
+    file.write_all(b"Defaults pwfeedback").expect("Wasn't able to write to file");
+
+    println!("Password feedback is now {}! Restart terminal to see changes.", "enabled".bold().green());
   }
 
   if args.disable {
-    Command::new("systemctl")
-      .args(["disable", "umbra-update.timer"])
-      .spawn()
-      .expect("Failed to disable auto-updates");
-    println!("Auto Updater have been: {}", "disabled".bold().red());
+    let res = fs::remove_file("/etc/sudoers.d/enable-pwfeedback");
+
+    match res {
+      Ok(_) => println!("Password feedback is now {}! Restart terminal to see changes.", "disabled".bold().red()),
+      Err(_) => eprintln!("{}", "File didn't exist or wasn't able to be removed".bold().red())
+    }
   }
 }

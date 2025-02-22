@@ -30,9 +30,6 @@ pub struct AutoUpdateArgs {
 
 #[derive(Args)]
 pub struct TogglePasswordFeedbackArgs {
-  /// Get current status
-  #[arg(short, long)]
-  pub status: bool,
   /// Enable asterisks in password
   #[arg(short, long)]
   pub enable: bool,

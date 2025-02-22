@@ -40,7 +40,11 @@ fn main() {
         }
 
         Commands::TogglePasswordFeedback(args) => {
-            //TODO toggle_password_feedback(&args);
+            if is_root() {
+                toggle_password_feedback(&args);
+            } else {
+                println!("{}: Please run this command with sudo.", "WARNING".bold().yellow());
+            }
         }
 
         Commands::Update(args) => {
