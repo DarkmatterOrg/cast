@@ -1,9 +1,9 @@
-use crate::args::TogglePasswordFeedbackArgs;
+use crate::args::PasswordFeedbackArgs;
 use colored::Colorize;
 use std::fs;
 use std::io::Write;
 
-pub fn toggle_password_feedback(args: &TogglePasswordFeedbackArgs) {
+pub fn password_feedback(args: &PasswordFeedbackArgs) {
   if args.enable && args.disable {
     eprintln!("{}", "You can't use both --enable and --disable at the same time.".bold().red());
     return;

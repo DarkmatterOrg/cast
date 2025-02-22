@@ -29,7 +29,7 @@ pub struct AutoUpdateArgs {
 }
 
 #[derive(Args)]
-pub struct TogglePasswordFeedbackArgs {
+pub struct PasswordFeedbackArgs {
   /// Enable asterisks in password
   #[arg(short, long)]
   pub enable: bool,
@@ -49,7 +49,7 @@ pub enum Commands {
   ///Clean up old up unused podman images, volumes, flatpak packages and rpm-ostree content
   CleanSystem,
   ///Toggles password prompt feedback in terminal, where sudo password prompts will display asterisks when enabled
-  TogglePasswordFeedback(TogglePasswordFeedbackArgs),
+  PasswordFeedback(PasswordFeedbackArgs),
   /// Run an update on user, system or both
   Update(UpdateArgs),
 }

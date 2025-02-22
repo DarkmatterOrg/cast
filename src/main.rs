@@ -7,7 +7,7 @@ use colored::Colorize;
 //use std::path::Path;
 
 use crate::modules::{
-    auto_update::auto_update, bios::bios, clean_system::clean_system, toggle_password_feedback::toggle_password_feedback, update::update,
+    auto_update::auto_update, bios::bios, clean_system::clean_system, password_feedback::password_feedback, update::update,
 };
 
 const VERSION: &str = clap::crate_version!();
@@ -39,9 +39,9 @@ fn main() {
             clean_system();
         }
 
-        Commands::TogglePasswordFeedback(args) => {
+        Commands::PasswordFeedback(args) => {
             if is_root() {
-                toggle_password_feedback(&args);
+                password_feedback(&args);
             } else {
                 println!("{}: Please run this command with sudo.", "WARNING".bold().yellow());
             }
