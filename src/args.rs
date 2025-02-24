@@ -50,6 +50,16 @@ pub struct DevArgs {
     pub remove: bool,
 }
 
+#[derive(Args)]
+pub struct FixesArgs {
+    /// Kills all processes related to wine and proton. This forces it to restart next time you launch the game (you might still have to press STOP in steam to kill the game binary)
+    #[arg(short, long)]
+    pub proton_hang: bool,
+    #[arg(short, long)]
+    /// Patch GMod's 64-bit beta to work properly on Linux (https://github.com/solsticegamestudios/GModCEFCodecFix)
+    pub gmod: bool,
+}
+
 #[derive(Subcommand)]
 pub enum Commands {
     /// Show CLI version
@@ -62,6 +72,8 @@ pub enum Commands {
     CleanSystem,
     /// Install different programming utilities
     Dev(DevArgs),
+    /// Different fixes for various things
+    Fix(FixesArgs),
     ///Toggles password prompt feedback in terminal, where sudo password prompts will display asterisks when enabled
     PasswordFeedback(PasswordFeedbackArgs),
     /// Run an update on user, system or both

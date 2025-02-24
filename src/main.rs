@@ -7,7 +7,7 @@ use colored::Colorize;
 //use std::path::Path;
 
 use crate::modules::{
-    auto_update::auto_update, bios::bios, clean_system::clean_system, dev::dev,
+    auto_update::auto_update, bios::bios, clean_system::clean_system, dev::dev, fix::fix,
     toggle_password_feedback::toggle_password_feedback, update::update,
 };
 
@@ -47,6 +47,10 @@ fn main() {
 
         Commands::Dev(args) => {
             dev(&args);
+        }
+
+        Commands::Fix(args) => {
+            fix(&args);
         }
 
         Commands::PasswordFeedback(args) => {
