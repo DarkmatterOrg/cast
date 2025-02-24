@@ -16,6 +16,8 @@ fn main() {
     //    panic!("{}", "Nebula isn't present.".bold().red());
     //}
 
+    //TODO Add a check so cast can only be used on Umbra, with image_name
+
     let cli = args::Cli::parse();
 
     match cli.command {
