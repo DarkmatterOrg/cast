@@ -6,5 +6,6 @@ edition = "2024"
 [dependencies]
 clap = { version = "4.5.30", features = ["cargo", "derive", "string"] }
 colored = "3.0.0"
+directories = "6.0.0"
 libc = "0.2.169"
 which = "7.0.2"

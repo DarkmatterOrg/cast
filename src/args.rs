@@ -55,9 +55,15 @@ pub struct FixesArgs {
     /// Kills all processes related to wine and proton. This forces it to restart next time you launch the game (you might still have to press STOP in steam to kill the game binary)
     #[arg(short, long)]
     pub proton_hang: bool,
-    #[arg(short, long)]
     /// Patch GMod's 64-bit beta to work properly on Linux (https://github.com/solsticegamestudios/GModCEFCodecFix)
+    #[arg(short, long)]
     pub gmod: bool,
+    /// Fix Discord flatpak RPC
+    #[arg(short, long)]
+    pub discord: bool,
+    /// Fix Vesktop flatpak RPC
+    #[arg(short, long)]
+    pub vesktop: bool,
 }
 
 #[derive(Subcommand)]
