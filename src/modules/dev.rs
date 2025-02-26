@@ -1,7 +1,7 @@
 use crate::args::DevArgs;
+use crate::utils::{is_cmd_installed::is_cmd_installed, status_msg::warning};
 use colored::Colorize;
 use std::process::Command;
-use which::which;
 
 pub fn dev(args: &DevArgs) {
     if args.install && args.remove {
@@ -69,23 +69,8 @@ pub fn dev(args: &DevArgs) {
         }
 
         _ => {
-            eprintln!(
-                "{}: {} is not a valid option!",
-                "WARNING".bold().yellow(),
-                args.option.italic().cyan()
-            );
+            warning(format!("{} is not a valid option!", args.option.italic().cyan()).as_str());
             return;
         }
     }
-}
-
-fn is_cmd_installed(cmd: &str) -> bool {
-    match which(cmd) {
-        Ok(_) => {
-            return true;
-        }
-        Err(_) => {
-            return false;
-        }
-    };
 }

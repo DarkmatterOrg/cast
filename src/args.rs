@@ -9,6 +9,7 @@ pub struct Cli {
 }
 
 #[derive(Args)]
+#[command(arg_required_else_help = true)]
 pub struct UpdateArgs {
     /// User, System or Both
     #[arg(short, long)]
@@ -16,6 +17,7 @@ pub struct UpdateArgs {
 }
 
 #[derive(Args)]
+#[command(arg_required_else_help = true)]
 pub struct AutoUpdateArgs {
     /// Get current status
     #[arg(short, long)]
@@ -29,6 +31,7 @@ pub struct AutoUpdateArgs {
 }
 
 #[derive(Args)]
+#[command(arg_required_else_help = true)]
 pub struct PasswordFeedbackArgs {
     /// Enable asterisks in password
     #[arg(short, long)]
@@ -39,6 +42,7 @@ pub struct PasswordFeedbackArgs {
 }
 
 #[derive(Args)]
+#[command(arg_required_else_help = true)]
 pub struct DevArgs {
     /// Values: rustup
     pub option: String,

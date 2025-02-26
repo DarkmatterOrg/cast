@@ -1,5 +1,6 @@
 mod args;
 mod modules;
+mod utils;
 
 use args::Commands;
 use clap::Parser;
@@ -10,6 +11,8 @@ use crate::modules::{
     auto_update::auto_update, bios::bios, clean_system::clean_system, dev::dev, fix::fix,
     toggle_password_feedback::toggle_password_feedback, update::update,
 };
+
+use crate::utils::{is_root::is_root, status_msg::warning};
 
 const VERSION: &str = clap::crate_version!();
 fn main() {
@@ -30,10 +33,7 @@ fn main() {
             if is_root() {
                 auto_update(&args);
             } else {
-                println!(
-                    "{}: Please run this command with sudo.",
-                    "WARNING".bold().yellow()
-                );
+                warning("Please run this command with sudo.");
             }
         }
 
@@ -57,10 +57,7 @@ fn main() {
             if is_root() {
                 toggle_password_feedback(&args);
             } else {
-                println!(
-                    "{}: Please run this command with sudo.",
-                    "WARNING".bold().yellow()
-                );
+                warning("Please run this command with sudo.");
             }
         }
 
@@ -68,8 +65,4 @@ fn main() {
             update(&args);
         }
     }
-}
-
-fn is_root() -> bool {
-    unsafe { libc::geteuid() == 0 }
 }
