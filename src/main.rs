@@ -5,7 +5,8 @@ mod utils;
 use args::Commands;
 use clap::Parser;
 use colored::Colorize;
-//use std::path::Path;
+use std::path::Path;
+use utils::status_msg::error;
 
 use crate::modules::{
     auto_update::auto_update, bios::bios, clean_system::clean_system, dev::dev, fix::fix,
@@ -16,11 +17,10 @@ use crate::utils::{is_root::is_root, status_msg::warning};
 
 const VERSION: &str = clap::crate_version!();
 fn main() {
-    //if !Path::new("/usr/bin/nebula").exists() {
-    //    panic!("{}", "Nebula isn't present.".bold().red());
-    //}
-
-    //TODO Add a check so cast can only be used on Umbra, with image_name
+    if !Path::new("/usr/share/umbra").exists() {
+        error("Cast can only be used on Umbra.");
+        return;
+    }
 
     let cli = args::Cli::parse();
 

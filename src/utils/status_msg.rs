@@ -5,5 +5,5 @@ pub fn warning(msg: &str) {
 }
 
 pub fn error(msg: &str) {
-    println!("{}: {}", "WARNING".bold().yellow(), msg);
+    println!("{}: {}", "ERROR".bold().red(), msg);
 }
