@@ -55,6 +55,7 @@ pub struct DevArgs {
 }
 
 #[derive(Args)]
+#[command(arg_required_else_help = true)]
 pub struct FixesArgs {
     /// Kills all processes related to wine and proton. This forces it to restart next time you launch the game (you might still have to press STOP in steam to kill the game binary)
     #[arg(short, long)]
