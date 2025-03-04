@@ -1,16 +1,22 @@
 use crate::args::DevArgs;
+use crate::config;
+use crate::utils::status_msg::{done, info, notice};
 use crate::utils::{is_cmd_installed::is_cmd_installed, status_msg::warning};
 use colored::Colorize;
 use std::process::Command;
 
 pub fn dev(args: &DevArgs) {
+    let is_insult_enabled = config::get::get_config().insults;
+
     if args.install && args.remove {
-        eprintln!(
-            "{}",
-            "You can't use both --install and --remove at the same time."
-                .bold()
-                .red()
-        );
+        if is_insult_enabled {
+            warning(
+                "What the fuck are you doing? You can't use --install and --remove at the same time!",
+            );
+        } else {
+            warning("You can't use both --install and --remove at the same time.");
+        }
+
         return;
     }
 
@@ -18,10 +24,12 @@ pub fn dev(args: &DevArgs) {
         "rustup" => {
             if args.install {
                 if is_cmd_installed("rustup") {
-                    println!(
-                        "{}",
-                        "Rustup is already installed, nothing todo.".bold().yellow()
-                    );
+                    if is_insult_enabled {
+                        notice("Are you dumb? Rustup is already installed...");
+                    } else {
+                        notice("Rustup is already installed, nothing todo.");
+                    }
+
                     return;
                 }
 
@@ -33,18 +41,14 @@ pub fn dev(args: &DevArgs) {
                     .status()
                     .expect("Was unable to install rustup");
 
-                println!(
-                    "{}",
-                    "Rustup got installed, please restart the terminal to start using it."
-                        .italic()
-                        .yellow()
-                );
+                done("Rustup got installed, please restart the terminal to start using it.");
             } else if args.remove {
                 if !is_cmd_installed("rustup") {
-                    println!(
-                        "{}",
-                        "Rustup is not installed, nothing todo.".bold().yellow()
-                    );
+                    if is_insult_enabled {
+                        notice("Are you dumb? Rustup isn't even installed...");
+                    } else {
+                        notice("Rustup is not installed, nothing todo.");
+                    }
                     return;
                 }
 
@@ -53,23 +57,28 @@ pub fn dev(args: &DevArgs) {
                     .status()
                     .expect("Wasn't able to uninstall rustup");
 
-                println!(
-                    "{}",
-                    "Rustup got removed, please restart the terminal to start using it."
-                        .italic()
-                        .yellow()
-                );
+                done("Rustup got removed, please restart the terminal to start using it.");
             } else {
                 if is_cmd_installed("rustup") {
-                    println!("Rustup is currently: {}", "installed".bold().green());
+                    info(format!("Rustup is currently: {}", "installed".bold().green()).as_str());
                 } else {
-                    println!("Rustup is currently: {}", "not installed".bold().red());
+                    info(format!("Rustup is currently: {}", "not installed".bold().red()).as_str());
                 }
             }
         }
 
         _ => {
-            warning(format!("{} is not a valid option!", args.option.italic().cyan()).as_str());
+            if is_insult_enabled {
+                warning(
+                    format!(
+                        "What the fuck do you want me to do with, {}? It's not a valid option!",
+                        args.option.italic().cyan()
+                    )
+                    .as_str(),
+                );
+            } else {
+                warning(format!("{} is not a valid option!", args.option.italic().cyan()).as_str());
+            }
             return;
         }
     }

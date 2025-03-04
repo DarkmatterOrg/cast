@@ -1,4 +1,5 @@
 mod args;
+mod config;
 mod modules;
 mod utils;
 
@@ -6,14 +7,16 @@ use args::Commands;
 use clap::Parser;
 use colored::Colorize;
 use std::path::Path;
-use utils::status_msg::error;
 
 use crate::modules::{
     auto_update::auto_update, bios::bios, clean_system::clean_system, dev::dev, fix::fix,
     toggle_password_feedback::toggle_password_feedback, update::update,
 };
 
-use crate::utils::{is_root::is_root, status_msg::warning};
+use crate::utils::{
+    is_root::is_root,
+    status_msg::{error, notice},
+};
 
 const VERSION: &str = clap::crate_version!();
 fn main() {
@@ -21,6 +24,10 @@ fn main() {
         error("Cast can only be used on Umbra.");
         return;
     }
+
+    //TODO Implement the command to change the configs
+
+    config::set::initialize_config();
 
     let cli = args::Cli::parse();
 
@@ -33,7 +40,7 @@ fn main() {
             if is_root() {
                 auto_update(&args);
             } else {
-                warning("Please run this command with sudo.");
+                notice("Please run this command with sudo.");
             }
         }
 
@@ -57,7 +64,7 @@ fn main() {
             if is_root() {
                 toggle_password_feedback(&args);
             } else {
-                warning("Please run this command with sudo.");
+                notice("Please run this command with sudo.");
             }
         }
 
