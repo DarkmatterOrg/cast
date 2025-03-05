@@ -11,9 +11,10 @@ pub struct Cli {
 #[derive(Args)]
 #[command(arg_required_else_help = true)]
 pub struct UpdateArgs {
-    /// User, System or Both
     #[arg(short, long)]
-    pub option: String,
+    pub system: bool,
+    #[arg(short, long)]
+    pub user: bool,
 }
 
 #[derive(Args)]
@@ -43,7 +44,7 @@ pub struct PasswordFeedbackArgs {
 
 #[derive(Args)]
 #[command(arg_required_else_help = true)]
-pub struct DevArgs {
+pub struct DevUtilArgs {
     /// Values: rustup
     pub option: String,
     /// Install the utility
@@ -84,7 +85,7 @@ pub enum Commands {
     /// Get the path where the config is
     Config,
     /// Install different programming utilities
-    Dev(DevArgs),
+    DevUtil(DevUtilArgs),
     /// Different fixes for various things
     Fix(FixesArgs),
     ///Toggles password prompt feedback in terminal, where sudo password prompts will display asterisks when enabled

@@ -1,21 +1,14 @@
 use crate::args::UpdateArgs;
-use crate::utils::status_msg::{error, warning};
-use colored::Colorize;
+use crate::utils::status_msg::error;
 use std::process::Command;
 
 pub fn update(args: &UpdateArgs) {
-    let update_option = args.option.to_lowercase();
+    if args.system {
+        update_system();
+    }
 
-    if update_option == "user" {
+    if args.user {
         update_user();
-    } else if update_option == "system" {
-        update_system();
-    } else if update_option == "both" {
-        update_system();
-        update_user();
-    } else {
-        warning(format!("{} is not a valid option!", update_option.cyan().italic()).as_str());
-        return;
     }
 }
 

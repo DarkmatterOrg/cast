@@ -1,11 +1,11 @@
-use crate::args::DevArgs;
+use crate::args::DevUtilArgs;
 use crate::config;
 use crate::utils::status_msg::{done, info, notice};
 use crate::utils::{is_cmd_installed::is_cmd_installed, status_msg::warning};
 use colored::Colorize;
 use std::process::Command;
 
-pub fn dev(args: &DevArgs) {
+pub fn dev(args: &DevUtilArgs) {
     let is_insult_enabled = config::get::get_config().insults;
 
     if args.install && args.remove {

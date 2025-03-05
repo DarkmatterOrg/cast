@@ -54,7 +54,7 @@ fn main() {
             info(format!("Config can be found at: {:?}", config::config_path()).as_str());
         }
 
-        Commands::Dev(args) => {
+        Commands::DevUtil(args) => {
             dev(&args);
         }
 
