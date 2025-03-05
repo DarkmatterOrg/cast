@@ -81,6 +81,8 @@ pub enum Commands {
     Bios,
     ///Clean up old up unused podman images, volumes, flatpak packages and rpm-ostree content
     CleanSystem,
+    /// Get the path where the config is
+    Config,
     /// Install different programming utilities
     Dev(DevArgs),
     /// Different fixes for various things

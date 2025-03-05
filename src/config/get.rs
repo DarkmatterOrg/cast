@@ -3,10 +3,7 @@ use crate::utils::status_msg::warning;
 use std::fs;
 
 pub fn get_config() -> Config {
-    let path = match config_path() {
-        Some(p) => p,
-        None => return Config::default(),
-    };
+    let path = config_path();
 
     // Return default config if file doesn't exist
     if !path.exists() {

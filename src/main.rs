@@ -15,7 +15,7 @@ use crate::modules::{
 
 use crate::utils::{
     is_root::is_root,
-    status_msg::{error, notice},
+    status_msg::{error, info, notice},
 };
 
 const VERSION: &str = clap::crate_version!();
@@ -24,8 +24,6 @@ fn main() {
         error("Cast can only be used on Umbra.");
         return;
     }
-
-    //TODO Implement the command to change the configs
 
     config::set::initialize_config();
 
@@ -50,6 +48,10 @@ fn main() {
 
         Commands::CleanSystem => {
             clean_system();
+        }
+
+        Commands::Config => {
+            info(format!("Config can be found at: {:?}", config::config_path()).as_str());
         }
 
         Commands::Dev(args) => {
