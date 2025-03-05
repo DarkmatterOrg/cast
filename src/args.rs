@@ -2,7 +2,7 @@ use clap::{Args, Parser, Subcommand};
 
 /// Umrba's custom CLI
 #[derive(Parser)]
-#[command(long_about = None, arg_required_else_help = true)]
+#[command(about, long_about = None, arg_required_else_help = true)]
 pub struct Cli {
     #[clap(subcommand)]
     pub command: Commands,
