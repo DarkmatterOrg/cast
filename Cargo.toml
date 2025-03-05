@@ -1,5 +1,7 @@
 [package]
 name = "cast"
+authors = ["Aethrexal <contact@aethrexal.dev>"]
+description = "A custom tool for Umbra."
 version = "0.1.1"
 edition = "2024"
 

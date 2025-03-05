@@ -1,6 +1,5 @@
 use clap::{Args, Parser, Subcommand};
 
-/// Umrba's custom CLI
 #[derive(Parser)]
 #[command(about, long_about = None, arg_required_else_help = true)]
 pub struct Cli {
