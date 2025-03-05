@@ -10,15 +10,6 @@ pub struct Cli {
 
 #[derive(Args)]
 #[command(arg_required_else_help = true)]
-pub struct UpdateArgs {
-    #[arg(short, long)]
-    pub system: bool,
-    #[arg(short, long)]
-    pub user: bool,
-}
-
-#[derive(Args)]
-#[command(arg_required_else_help = true)]
 pub struct AutoUpdateArgs {
     /// Get current status
     #[arg(short, long)]
@@ -33,19 +24,8 @@ pub struct AutoUpdateArgs {
 
 #[derive(Args)]
 #[command(arg_required_else_help = true)]
-pub struct PasswordFeedbackArgs {
-    /// Enable asterisks in password
-    #[arg(short, long)]
-    pub enable: bool,
-    /// Disable asterisks in password
-    #[arg(short, long)]
-    pub disable: bool,
-}
-
-#[derive(Args)]
-#[command(arg_required_else_help = true)]
 pub struct DevUtilArgs {
-    /// Values: rustup
+    #[arg(value_parser=["rustup"])]
     pub option: String,
     /// Install the utility
     #[arg(short, long)]
@@ -70,6 +50,26 @@ pub struct FixesArgs {
     /// Fix Vesktop flatpak RPC
     #[arg(short, long)]
     pub vesktop: bool,
+}
+
+#[derive(Args)]
+#[command(arg_required_else_help = true)]
+pub struct PasswordFeedbackArgs {
+    /// Enable asterisks in password
+    #[arg(short, long)]
+    pub enable: bool,
+    /// Disable asterisks in password
+    #[arg(short, long)]
+    pub disable: bool,
+}
+
+#[derive(Args)]
+#[command(arg_required_else_help = true)]
+pub struct UpdateArgs {
+    #[arg(short, long)]
+    pub system: bool,
+    #[arg(short, long)]
+    pub user: bool,
 }
 
 #[derive(Subcommand)]
