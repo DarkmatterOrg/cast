@@ -1,4 +1,5 @@
 use crate::args::FixesArgs;
+use crate::utils::status_msg::{done, info, notice};
 use colored::Colorize;
 use std::fs::File;
 use std::io::prelude::*;
@@ -11,7 +12,7 @@ pub fn fix(args: &FixesArgs) {
 
         fix_rpc("com.discordapp.Discord", "discord", "Discord");
 
-        println!("{}", "Done!".bold().green());
+        done("Fixed flatpak Discord RPC.");
     }
 
     if args.gmod {
@@ -41,7 +42,7 @@ pub fn fix(args: &FixesArgs) {
             .status()
             .expect("Not able to remove /tmp/patch-gmod");
 
-        println!("{}", "Done!".bold().green());
+        done("Fixed gmod.")
     }
 
     if args.proton_hang {
@@ -68,7 +69,7 @@ pub fn fix(args: &FixesArgs) {
                 .expect("Was unable to kill");
         }
 
-        println!("{}", "Done!".bold().green());
+        done("Fixed proton hang.")
     }
 
     if args.vesktop {
@@ -76,7 +77,7 @@ pub fn fix(args: &FixesArgs) {
 
         fix_rpc("dev.vencord.Vesktop", "vesktop", "Vesktop");
 
-        println!("{}", "Done!".bold().green());
+        done("Fixed flatpak Vesktop RPC.");
     }
 }
 
@@ -86,13 +87,10 @@ fn fix_rpc(long_client: &str, short_client: &str, pretty_name: &str) {
 
     match fs::create_dir(&tmp_dir) {
         Ok(_) => {
-            println!("{}", "Directory created...".italic().yellow());
+            info("Directory created..");
         }
         Err(_) => {
-            println!(
-                "{}",
-                "Directory already exists, continuing...".italic().yellow()
-            );
+            info("Directory already exists, continuing...");
         }
     }
 
@@ -131,7 +129,7 @@ fn fix_rpc(long_client: &str, short_client: &str, pretty_name: &str) {
         .status()
         .expect("Unable to link");
 
-    println!("{}", "Need to use sudo...".bold().blue());
+    notice("Need to use sudo..");
 
     Command::new("sudo")
         .args(["flatpak", "override", "--filesystem=xdg-run/discord-ipc-*"])
@@ -147,7 +145,7 @@ fn fix_rpc(long_client: &str, short_client: &str, pretty_name: &str) {
         .status()
         .expect(format!("Unable to override {}", &pretty_name).as_str());
 
-    println!("{}", "Adding fix to autostart...".italic().blue());
+    info("Adding fix to autostart..");
 
     Command::new("mkdir")
         .args(["-pv", format!("/home/{}/.config/autostart", user).as_str()])

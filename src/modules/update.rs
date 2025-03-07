@@ -1,8 +1,14 @@
 use crate::args::UpdateArgs;
+use crate::utils::is_cmd_installed::is_cmd_installed;
 use crate::utils::status_msg::error;
 use std::process::Command;
 
 pub fn update(args: &UpdateArgs) {
+    if !is_cmd_installed("nebula") {
+        error("Nebula needs to be installed!");
+        return;
+    }
+
     if args.system {
         update_system();
     }

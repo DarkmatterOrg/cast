@@ -1,6 +1,9 @@
 use crate::{
     args::AutoUpdateArgs,
-    utils::{image_check_utils::get_image_type, status_msg::error},
+    utils::{
+        image_check_utils::get_image_type,
+        status_msg::{error, info},
+    },
 };
 use colored::Colorize;
 use std::process::{Command, Stdio};
@@ -21,7 +24,7 @@ pub fn auto_update(args: &AutoUpdateArgs) {
             current_status = "Enabled".green().bold();
         }
 
-        println!("Automatic updates are currently: {}", current_status);
+        info(format!("Automatic updates are currently: {}", current_status).as_str());
     }
 
     if args.enable && args.disable {
@@ -39,7 +42,7 @@ pub fn auto_update(args: &AutoUpdateArgs) {
             .args(["enable", get_timer_file_name()])
             .spawn()
             .expect("Failed to enable auto-updates");
-        println!("Auto Updater have been: {}", "enabled".bold().green());
+        info(format!("Auto Updater have been: {}", "enabled".bold().green()).as_str());
     }
 
     if args.disable {
@@ -47,7 +50,7 @@ pub fn auto_update(args: &AutoUpdateArgs) {
             .args(["disable", get_timer_file_name()])
             .spawn()
             .expect("Failed to disable auto-updates");
-        println!("Auto Updater have been: {}", "disabled".bold().red());
+        info(format!("Auto Updater have been: {}", "disabled".bold().red()).as_str());
     }
 }
 
