@@ -6,7 +6,6 @@ mod utils;
 use args::Commands;
 use clap::Parser;
 use colored::Colorize;
-use std::path::Path;
 
 use crate::modules::{
     auto_update::auto_update, bios::bios, clean_system::clean_system, dev::dev, fix::fix,
@@ -14,14 +13,15 @@ use crate::modules::{
 };
 
 use crate::utils::{
+    image_check_utils::is_correct_image,
     is_root::is_root,
     status_msg::{error, info, notice},
 };
 
 const VERSION: &str = clap::crate_version!();
 fn main() {
-    if !Path::new("/usr/share/umbra").exists() {
-        error("Cast can only be used on Umbra.");
+    if !is_correct_image() {
+        error("Cast can only be used on Umbra, Nova or Horizon based images.");
         return;
     }
 
