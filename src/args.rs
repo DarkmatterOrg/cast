@@ -1,4 +1,5 @@
-use clap::{Args, Parser, Subcommand};
+use clap::{Arg, Args, Command, Parser, Subcommand};
+use std::path::Path;
 
 #[derive(Parser)]
 #[command(about, long_about = None, arg_required_else_help = true)]
@@ -24,14 +25,8 @@ pub struct AutoUpdateArgs {
 #[derive(Args)]
 #[command(arg_required_else_help = true)]
 pub struct DevUtilArgs {
-    #[arg(value_parser=["rustup"])]
-    pub option: String,
-    /// Install the utility
-    #[arg(short, long)]
-    pub install: bool,
-    /// Remove the utility
-    #[arg(short, long)]
-    pub remove: bool,
+    pub install: Option<String>,
+    pub remove: Option<String>,
 }
 
 #[derive(Args)]
@@ -91,4 +86,160 @@ pub enum Commands {
     PasswordFeedback(PasswordFeedbackArgs),
     /// Run an update on user, system or both
     Update(UpdateArgs),
+}
+
+pub fn build_commands() -> Command {
+    // Start by defining the basic command
+    let mut cmd = Command::new("cast")
+        .about("User utility tool for Darkmatter")
+        .arg_required_else_help(true);
+
+    if Path::new("/usr/share/horizon").exists() {
+        cmd = cmd
+            .subcommand(Command::new("dbox-ubuntu").about("Create a Ubuntu distrobox container"))
+            .subcommand(
+                Command::new("dbox-ubuntu-with-pkgs")
+                    .arg(
+                        Arg::new("pkgs")
+                            .long("pkgs")
+                            .help("List of packages to install")
+                            .required(true)
+                            .value_name("Packages"),
+                    )
+                    .about("Create a Ubuntu distrobox + user specified packages"),
+            )
+            .subcommand(
+                Command::new("install-nix")
+                    .about("Install Nix using the DeterminateSystems nix-installer"),
+            );
+    }
+
+    if Path::new("/usr/share/nova").exists() {
+        cmd = cmd
+            .subcommand(Command::new("enable-tailscale").about("Enable Tailscale"))
+            .subcommand(Command::new("disable-tailscale").about("Disable Tailscale"))
+    }
+
+    cmd = cmd
+        .subcommand(Command::new("version").about("Show CLI version"))
+        .subcommand(
+            Command::new("auto-update")
+                .about("Toggle the auto-updater")
+                .arg_required_else_help(true)
+                .arg(
+                    Arg::new("status")
+                        .short('s')
+                        .long("status")
+                        .help("Get current status of the auto-updater")
+                        .num_args(0),
+                )
+                .arg(
+                    Arg::new("enable")
+                        .short('e')
+                        .long("enable")
+                        .help("Enable auto-updater")
+                        .num_args(0),
+                )
+                .arg(
+                    Arg::new("disable")
+                        .short('d')
+                        .long("disable")
+                        .help("Disable auto-updater")
+                        .num_args(0),
+                ),
+        )
+        .subcommand(Command::new("bios").about("Boot into this device's BIOS/UEFI screen"))
+        .subcommand(Command::new("clean-system").about("Clean up old and unused system files"))
+        .subcommand(Command::new("config").about("Get the config path"))
+        .subcommand(
+            Command::new("dev-util")
+                .about("Install different programming utilities")
+                .arg(
+                    Arg::new("install")
+                        .short('i')
+                        .long("install")
+                        .help("Install the specified utility")
+                        .value_name("UTILITY") // The name shown in help messages
+                        .num_args(1) // Require exactly one argument
+                        .required(false),
+                )
+                .arg(
+                    Arg::new("remove")
+                        .short('r')
+                        .long("remove")
+                        .help("Remove the specified utility")
+                        .value_name("UTILITY")
+                        .num_args(1)
+                        .required(false),
+                ),
+        )
+        .subcommand(
+            Command::new("fix")
+                .about("Different fixes for various things")
+                .arg_required_else_help(true)
+                .arg(
+                    Arg::new("proton_hang")
+                        .long("proton-hang")
+                        .help("Kills all processes related to wine and proton")
+                        .num_args(0),
+                )
+                .arg(
+                    Arg::new("gmod")
+                        .long("gmod")
+                        .help("Patch GMod's 64-bit beta to work properly on Linux")
+                        .num_args(0),
+                )
+                .arg(
+                    Arg::new("discord")
+                        .long("discord")
+                        .help("Fix Discord flatpak RPC")
+                        .num_args(0),
+                )
+                .arg(
+                    Arg::new("vesktop")
+                        .long("vesktop")
+                        .help("Fix Vesktop flatpak RPC")
+                        .num_args(0),
+                ),
+        )
+        .subcommand(
+            Command::new("password-feedback")
+                .about("Toggle password feedback in the terminal")
+                .arg_required_else_help(true)
+                .arg(
+                    Arg::new("enable")
+                        .short('e')
+                        .long("enable")
+                        .help("Enable asterisks in password")
+                        .num_args(0),
+                )
+                .arg(
+                    Arg::new("disable")
+                        .short('d')
+                        .long("disable")
+                        .help("Disable asterisks in password")
+                        .num_args(0),
+                ),
+        )
+        .subcommand(
+            Command::new("update")
+                .about("Run an update on user, system, or both")
+                .arg_required_else_help(true)
+                .arg(
+                    Arg::new("system")
+                        .short('s')
+                        .long("system")
+                        .help("Update the system")
+                        .num_args(0),
+                )
+                .arg(
+                    Arg::new("user")
+                        .short('u')
+                        .long("user")
+                        .help("Update the user environment")
+                        .num_args(0),
+                ),
+        );
+
+    cmd
 }
