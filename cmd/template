@@ -1,0 +1,19 @@
+// REMOVE THIS LINE AND UNCOMMENT EVERYTHING BELOW TO START MAKING THE COMMAND
+// DONT FORGET TO ADD THE GO EXTENSION TO THE FILE
+
+// package cmd
+
+// import (
+// 	"github.com/spf13/cobra"
+// )
+
+// var TEMPLATECmd = &cobra.Command{
+// 	Use:   "TEMPLATE",
+// 	Short: "TEMPLATE",
+// 	Run: func(cmd *cobra.Command, args []string) {
+// 	},
+// }
+
+// func init() {
+// 	rootCmd.AddCommand(TEMPLATECmd)
+// }
