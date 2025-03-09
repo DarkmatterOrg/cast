@@ -7,6 +7,7 @@ require (
 	github.com/darkmatterorg/orbit v0.0.0-20250309174102-10bc0b9ece99
 	github.com/fatih/color v1.18.0
 	github.com/spf13/cobra v1.9.1
+	github.com/spf13/pflag v1.0.6
 )
 
 require (
@@ -15,7 +16,6 @@ require (
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/spf13/afero v1.12.0 // indirect
-	github.com/spf13/pflag v1.0.6 // indirect
 	golang.org/x/sys v0.31.0 // indirect
 	golang.org/x/term v0.30.0 // indirect
 	golang.org/x/text v0.23.0 // indirect
