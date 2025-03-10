@@ -1,18 +1,17 @@
 package cmd
 
 import (
-	"os"
-	"os/exec"
-	"time"
-
-	"github.com/darkmatterorg/orbit/utils"
 	"github.com/spf13/cobra"
 )
 
-//TODO Move fixes to it's own directory like dev-tools
+// DON'T ADD ANY SUBCOMMANDS AND STUFF HERE, CREATE A FILE IN fixes/ FOR IT.
+// CHECK THE CURRENT FILES IN THERE FOR AN EXAMPLE
+//
+// IF YOU WANT TO MAKE ONE SPECIFIC FOR AN IMAGE, IT GOES IN THE IMAGE FOLDER (horizon/nova/umbra) LIKE NORMAL.
+// JUST BE SURE TO INIT WITH cmd.FixCmd.AddCommand()
 
 var (
-	fixCmd = &cobra.Command{
+	FixCmd = &cobra.Command{
 		Use:   "fix",
 		Short: "Different fixes for various things",
 		Args:  cobra.ExactArgs(1),
@@ -20,71 +19,7 @@ var (
 		},
 	}
 
-	protonHangCmd = &cobra.Command{
-		Use:   "proton-hang",
-		Short: "Kills all processes related to wine and proton.",
-		Long:  "Kills all processes related to wine and proton. This forces it to restart next time you launch the game (you might still have to press STOP in steam to kill the game binary)",
-		Run: func(cmd *cobra.Command, args []string) {
-			protonCore := []string{
-				"pv-bwrap",
-				"pressure-vessel",
-				"reaper",
-				"explorer.exe",
-				"rpcss.exe",
-				"plugplay.exe",
-				"services.exe",
-				"svchost.exe",
-				"winedevice.exe",
-				"winedevice.exe",
-				"wineserver",
-			}
-
-			for _, core := range protonCore {
-				if err := exec.Command("killall", "-9", core); err != nil {
-					utils.Warn("Was unable to kill: " + core)
-				}
-			}
-
-			utils.Done("Fixed proton hang")
-		},
-	}
-
-	gmodCmd = &cobra.Command{
-		Use:   "gmod",
-		Short: "Patch GMod's 64-bit beta to work properly on Linux (https://github.com/solsticegamestudios/GModCEFCodecFix)",
-		Run: func(cmd *cobra.Command, args []string) {
-			utils.StartSpinner()
-			if err := os.MkdirAll("/tmp/patch-gmod", os.ModePerm); err != nil {
-				utils.Error("Failed to create /tmp/patch-gmod")
-				os.Exit(1)
-			}
-
-			cmdToRun := exec.Command("sh", "-c", "wget $(curl -s https://api.github.com/repos/solsticegamestudios/GModCEFCodecFix/releases/latest | jq -r '.assets[] | select(.name | test(\"GModCEFCodecFix-Linux\")) | .browser_download_url') -P /tmp/patch-gmod")
-			if err := cmdToRun.Run(); err != nil {
-				utils.Error("Failed to get the gmod patch")
-				os.Exit(1)
-			}
-
-			cmdToRun = exec.Command("chmod", "+x", "/tmp/patch-gmod/GModCEFCodecFix-Linux")
-			if err := cmdToRun.Run(); err != nil {
-				utils.Error("Failed to give the patch run permissions")
-				os.Exit(1)
-			}
-
-			cmdToRun = exec.Command("/tmp/patch-gmod/GModCEFCodecFix-Linux")
-			if err := cmdToRun.Run(); err != nil {
-				utils.Error("Failed to run the patch")
-				os.Exit(1)
-			}
-
-			time.Sleep(4 * time.Second)
-
-			os.RemoveAll("/tmp/patch-gmod")
-
-			utils.StopSpinner()
-			utils.Done("Fixed gmod")
-		},
-	}
+	// ATM THE FIXES FOR THESE DOESN'T REALLY WORK, WILL BE IN HERE FOR THE TIME BEING
 
 	// fixDiscord = &cobra.Command{
 	// 	Use:   "discord",
@@ -104,10 +39,7 @@ var (
 )
 
 func init() {
-	RootCmd.AddCommand(fixCmd)
-
-	fixCmd.AddCommand(protonHangCmd)
-	fixCmd.AddCommand(gmodCmd)
+	RootCmd.AddCommand(FixCmd)
 	// fixCmd.AddCommand(fixDiscord)
 	// fixCmd.AddCommand(fixVesktop)
 }
