@@ -1,8 +1,10 @@
 github.com/briandowns/spinner v1.23.2 h1:Zc6ecUnI+YzLmJniCfDNaMbW0Wid1d5+qcTq4L2FW8w=
 github.com/briandowns/spinner v1.23.2/go.mod h1:LaZeM4wm2Ywy6vO571mvhQNRcWfRUnXOs0RcKV0wYKM=
 github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
-github.com/darkmatterorg/orbit v0.0.0-20250309174102-10bc0b9ece99 h1:8k4CVCZZe9a7qy48oRXPoRmPogdOc8vNbRO1zMDgslE=
-github.com/darkmatterorg/orbit v0.0.0-20250309174102-10bc0b9ece99/go.mod h1:XQJ64YYKadoV7GzA2ZeLf6xEstpE0b9xIma5pYs3Yic=
+github.com/darkmatterorg/orbit v0.0.0-20250310171507-b5e394af6437 h1:7VegJmfdcTHJ4A4+QeeMvAphaGcDO3ASiKxyxKOm7EM=
+github.com/darkmatterorg/orbit v0.0.0-20250310171507-b5e394af6437/go.mod h1:XQJ64YYKadoV7GzA2ZeLf6xEstpE0b9xIma5pYs3Yic=
+github.com/darkmatterorg/orbit v0.0.0-20250310172501-23c1023b9331 h1:On5N1fTsZafUZlTSIwWR2jIO4kXA6zgsyarEeSRuV3Y=
+github.com/darkmatterorg/orbit v0.0.0-20250310172501-23c1023b9331/go.mod h1:XQJ64YYKadoV7GzA2ZeLf6xEstpE0b9xIma5pYs3Yic=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/fatih/color v1.18.0 h1:S8gINlzdQ840/4pfAwic/ZE0djQEH3wM94VfqLTZcOM=
 github.com/fatih/color v1.18.0/go.mod h1:4FelSpRwEGDpQ12mAdzqdOukCy4u8WUtOY6lkT/6HfU=

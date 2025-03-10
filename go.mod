@@ -4,7 +4,7 @@ go 1.24.1
 
 require (
 	github.com/briandowns/spinner v1.23.2
-	github.com/darkmatterorg/orbit v0.0.0-20250309174102-10bc0b9ece99
+	github.com/darkmatterorg/orbit v0.0.0-20250310172501-23c1023b9331
 	github.com/fatih/color v1.18.0
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/pflag v1.0.6
