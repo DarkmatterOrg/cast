@@ -17,7 +17,7 @@ var rustupCmd = &cobra.Command{
 	Short: "Install or Remove rustup",
 	Args: func(cmd *cobra.Command, args []string) error {
 		if cmd.Flags().NFlag() == 0 {
-			return fmt.Errorf("Please use either --install or --remove flag")
+			return fmt.Errorf("please use either --install or --remove flag")
 		}
 		return nil
 	},
