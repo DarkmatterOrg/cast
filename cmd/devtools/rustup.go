@@ -2,6 +2,7 @@ package devtools
 
 import (
 	"cast/cmd"
+	"fmt"
 	"os"
 	"os/exec"
 	"time"
@@ -14,6 +15,12 @@ import (
 var rustupCmd = &cobra.Command{
 	Use:   "rustup",
 	Short: "Install or Remove rustup",
+	Args: func(cmd *cobra.Command, args []string) error {
+		if cmd.Flags().NFlag() == 0 {
+			return fmt.Errorf("Please use either --install or --remove flag")
+		}
+		return nil
+	},
 	Run: func(cmd *cobra.Command, args []string) {
 		installFlag, _ := cmd.Flags().GetBool("install")
 		removeFlag, _ := cmd.Flags().GetBool("remove")
@@ -28,8 +35,6 @@ var rustupCmd = &cobra.Command{
 			installRustup(verboseFlag)
 		} else if removeFlag {
 			removeRustup(verboseFlag)
-		} else {
-			_ = cmd.Help()
 		}
 	},
 }

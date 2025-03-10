@@ -9,6 +9,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+//TODO Move fixes to it's own directory like dev-tools
+
 var (
 	fixCmd = &cobra.Command{
 		Use:   "fix",

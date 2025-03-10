@@ -40,6 +40,8 @@ func init() {
 	RootCmd.Flags().BoolVarP(&versionFlag, "version", "V", false, "Show version")
 	RootCmd.Root().CompletionOptions.DisableDefaultCmd = true
 	RootCmd.SetHelpFunc(customizeHelp)
+	errorTitle := color.New(color.FgRed, color.Bold).SprintFunc()
+	RootCmd.SetErrPrefix(errorTitle("ERROR"))
 }
 
 func Execute() {

@@ -2,6 +2,7 @@ package umbra
 
 import (
 	"cast/cmd"
+	"fmt"
 	"os"
 	"os/exec"
 	"path"
@@ -16,6 +17,12 @@ var (
 	mcreatorCmd = &cobra.Command{
 		Use:   "mcreator",
 		Short: "Install or Remove MCreator",
+		Args: func(cmd *cobra.Command, args []string) error {
+			if cmd.Flags().NFlag() == 0 {
+				return fmt.Errorf("Please use either --install or --remove flag")
+			}
+			return nil
+		},
 		Run: func(cmd *cobra.Command, args []string) {
 			installFlag, _ := cmd.Flags().GetBool("install")
 			removeFlag, _ := cmd.Flags().GetBool("remove")
@@ -30,8 +37,6 @@ var (
 				installMcreator(verboseFlag)
 			} else if removeFlag {
 				removeMcreator()
-			} else {
-				_ = cmd.Help()
 			}
 		},
 	}
