@@ -1,7 +1,6 @@
-package nova
+package cmd
 
 import (
-	"cast/cmd"
 	"os/exec"
 
 	"github.com/darkmatterorg/orbit/utils"
@@ -49,11 +48,9 @@ var (
 )
 
 func init() {
-	if utils.IsCurrentImage("nova") {
-		tailscaleCmd.Flags().BoolVar(&enableTailscaleFlag, "enable", false, "")
-		tailscaleCmd.Flags().BoolVar(&disableTailscaleFlag, "disable", false, "")
-		tailscaleCmd.MarkFlagsOneRequired("enable", "disable")
+	tailscaleCmd.Flags().BoolVar(&enableTailscaleFlag, "enable", false, "")
+	tailscaleCmd.Flags().BoolVar(&disableTailscaleFlag, "disable", false, "")
+	tailscaleCmd.MarkFlagsOneRequired("enable", "disable")
 
-		cmd.RootCmd.AddCommand(tailscaleCmd)
-	}
+	RootCmd.AddCommand(tailscaleCmd)
 }
