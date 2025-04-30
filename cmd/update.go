@@ -22,10 +22,12 @@ var (
 			}
 
 			if systemFlag {
+				utils.Info("Updating system")
 				updateSystem()
 			}
 
 			if userFlag {
+				utils.Info("Updating user")
 				updateUser()
 			}
 		},

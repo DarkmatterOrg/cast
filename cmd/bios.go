@@ -16,6 +16,7 @@ var biosCmd = &cobra.Command{
 			utils.Notice("Rebooting to legacy BIOS from OS is not supported")
 			return
 		} else {
+			//TODO Ask the user if they are sure
 			cmdToRun := exec.Command("systemctl", "reboot", "--firmware-setup")
 
 			if err := cmdToRun.Run(); err != nil {

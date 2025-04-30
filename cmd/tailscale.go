@@ -32,16 +32,14 @@ var (
 			}
 
 			if disableTailscaleFlag {
-				if enableTailscaleFlag {
-					cmdToRun := exec.Command("systemctl", "disable", "--now", "tailscale")
-					if err := cmdToRun.Run(); err != nil {
-						utils.Error("Failed to disable and stop Tailscale")
-						return
-					}
-
-					utils.Done("Tailscale is now disabled")
+				cmdToRun := exec.Command("systemctl", "disable", "--now", "tailscale")
+				if err := cmdToRun.Run(); err != nil {
+					utils.Error("Failed to disable and stop Tailscale")
 					return
 				}
+
+				utils.Done("Tailscale is now disabled")
+				return
 			}
 		},
 	}
