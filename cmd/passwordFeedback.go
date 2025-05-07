@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"cast/components"
+	"cast/lib"
 	"os"
 
 	"github.com/darkmatterorg/orbit/utils"
@@ -13,34 +15,31 @@ var (
 	disableFlag bool
 
 	passwordFeedbackCmd = &cobra.Command{
-		Use:   "password-feedback",
+		Use:   "pwd-fdbk",
 		Short: "Toggles password prompt feedback in terminal, where sudo password prompts will display asterisks when enabled",
 		Run: func(cmd *cobra.Command, args []string) {
 			if !utils.IsRoot() {
-				utils.Notice("Please run this command with sudo")
-				return
+				lib.Logger.Warn("You need to run this command with sudo")
+				os.Exit(0)
 			}
 
-			if enableFlag && disableFlag {
-				utils.Warn("You can't use both --enable and --disable at the same time.")
-				return
-			}
+			components.CheckEnableDisableFlag(enableFlag, disableFlag)
 
 			if enableFlag {
 				if err := utils.WriteFile("/etc/sudoers.d/enable-pwfeedback", "Defaults pwfeedback"); err != nil {
-					utils.Error("Unable to write the enable-pwfeedback file")
-					return
+					lib.Logger.Error("Unable to write the enable-pwfeedback file", "err", err)
+					os.Exit(1)
 				}
 
 				enabled := color.New(color.FgGreen, color.Bold).SprintFunc()
-				utils.Notice("Password feedback is now " + enabled("enabled") + "! Restart terminal to see changes")
+				lib.Logger.Info("Password feedback is now " + enabled("enabled") + "! Restart terminal to see changes")
 			}
 
 			if disableFlag {
 				os.Remove("/etc/sudoers.d/enable-pwfeedback")
 
 				disabled := color.New(color.FgRed, color.Bold).SprintFunc()
-				utils.Notice("Password feedback is now " + disabled("disabled") + "! Restart terminal to see changes")
+				lib.Logger.Info("Password feedback is now " + disabled("disabled") + "! Restart terminal to see changes")
 			}
 		},
 	}
