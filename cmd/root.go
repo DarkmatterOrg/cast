@@ -30,6 +30,11 @@ func init() {
 	// RootCmd.Root().CompletionOptions.DisableDefaultCmd = true
 	errorTitle := color.New(color.FgRed, color.Bold).SprintFunc()
 	RootCmd.SetErrPrefix(errorTitle("ERROR"))
+
+
+	if config.Config.Modules.Experimental {
+		RootCmd.AddGroup(&cobra.Group{ID: "experimental", Title: "Experimental"})
+	}
 }
 
 func Execute() {

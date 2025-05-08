@@ -13,7 +13,8 @@ import (
 
 var updateCmd = &cobra.Command{
 	Use:   "update",
-	Short: "*EXPERIMENTAL* Update system",
+	GroupID: "experimental",
+	Short: "Update system",
 	Run: func(cmd *cobra.Command, args []string) {
 		//TODO add support for other package managers
 

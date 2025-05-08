@@ -13,7 +13,8 @@ import (
 
 var installCmd = &cobra.Command{
 	Use:   "install",
-	Short: "*EXPERIMENTAL* Installs a package",
+	GroupID: "experimental",
+	Short: "Installs a package",
 	Run: func(cmd *cobra.Command, args []string) {
 		// TODO add support for other package managers
 
