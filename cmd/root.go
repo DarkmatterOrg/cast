@@ -35,6 +35,10 @@ func init() {
 		RootCmd.AddGroup(&cobra.Group{ID: "experimental", Title: "Experimental"})
 	}
 
+	if config.Config.Modules.Umbra {
+		RootCmd.AddGroup(&cobra.Group{ID: "umbra", Title: "Umbra"})
+	}
+
 	if config.Config.Modules.Fixes {
 		RootCmd.AddCommand(FixCmd)
 	}

@@ -12,3 +12,6 @@ experimentals = false
 # Various fixes for different applications
 # default: false
 fixes = false
+# Just various commands I use
+# default: false
+umbra = false

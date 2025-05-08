@@ -14,9 +14,6 @@ var (
 	FixCmd = &cobra.Command{
 		Use:   "fix",
 		Short: "Different fixes for various things",
-		Args:  cobra.ExactArgs(1),
-		Run: func(cmd *cobra.Command, args []string) {
-		},
 	}
 
 	// ATM THE FIXES FOR THESE DOESN'T REALLY WORK, WILL BE IN HERE FOR THE TIME BEING

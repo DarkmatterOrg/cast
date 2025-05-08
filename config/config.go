@@ -10,6 +10,7 @@ import (
 type Modules struct {
 	Experimentals bool `toml:"experimentals"`
 	Fixes bool `toml:"fixes"`
+	Umbra bool `toml:"umbra"`
 }
 
 type Settings struct {
