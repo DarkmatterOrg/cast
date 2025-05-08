@@ -34,7 +34,7 @@ var updateCmd = &cobra.Command{
 }
 
 func init() {
-	if config.Config.Modules.Experimental {
+	if config.Config.Modules.Experimentals {
 		cmd.RootCmd.AddCommand(updateCmd)
 	}
 }

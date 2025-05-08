@@ -4,6 +4,7 @@ import (
 	"cast/cmd"
 
 	_ "cast/cmd/experimental"
+	_ "cast/cmd/fixes"
 )
 
 // "cast/cmd"

@@ -57,7 +57,7 @@ var installCmd = &cobra.Command{
 }
 
 func init() {
-	if config.Config.Modules.Experimental {
+	if config.Config.Modules.Experimentals {
 		cmd.RootCmd.AddCommand(installCmd)
 	}
 }

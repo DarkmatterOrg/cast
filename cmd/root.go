@@ -26,23 +26,26 @@ var (
 
 func init() {
 	config.LoadConfig()
-	
 	// RootCmd.Root().CompletionOptions.DisableDefaultCmd = true
 	errorTitle := color.New(color.FgRed, color.Bold).SprintFunc()
 	RootCmd.SetErrPrefix(errorTitle("ERROR"))
 
 
-	if config.Config.Modules.Experimental {
+	if config.Config.Modules.Experimentals {
 		RootCmd.AddGroup(&cobra.Group{ID: "experimental", Title: "Experimental"})
+	}
+
+	if config.Config.Modules.Fixes {
+		RootCmd.AddCommand(FixCmd)
 	}
 }
 
 func Execute() {
-	if config.Config.Modules.Experimental {
+	if config.Config.Modules.Experimentals {
 		if config.Config.Insult {
-			lib.ImportantWarn("Either you're fucking stupid or just curious. Either way; experimental features are enabled, use at your own risk")
+			lib.Logger.ImportantWarn("Either you're fucking stupid or just curious. Either way; experimental features are enabled, use at your own risk")
 		} else {
-			lib.ImportantWarn("Experimental features are enabled, use at your own risk")
+			lib.Logger.ImportantWarn("Experimental features are enabled, use at your own risk")
 		}
 	}
 

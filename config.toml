@@ -9,3 +9,6 @@ insult = false
 # Enables experimental features, use at your own risk
 # default: false
 experimentals = false
+# Various fixes for different applications
+# default: false
+fixes = false

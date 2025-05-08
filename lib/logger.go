@@ -8,27 +8,54 @@ import (
 	"github.com/charmbracelet/log"
 )
 
-var Logger = log.NewWithOptions(os.Stderr, log.Options{
-	ReportTimestamp: true,
-	TimeFormat: time.TimeOnly,
-	Level: log.DebugLevel,
-})
+const SuccessLevel = log.InfoLevel + 1
+const ImportantWarnLevel = log.WarnLevel + 1
 
-func ImportantWarn(msg string) {
+type NewLog struct {
+	*log.Logger
+}
+
+func (l *NewLog) Success(msg string, args ...any) {
+	l.Log(SuccessLevel, msg, args...)
+}
+
+func (l *NewLog) ImportantWarn(msg string, args ...any) {
+	style := lipgloss.NewStyle().
+		Bold(true).
+		Padding(0, 1, 0, 1).
+		Background(lipgloss.Color("192")).
+		Foreground(lipgloss.Color("0"))
+
+	l.Log(ImportantWarnLevel, style.Render(msg), args...)
+}
+
+func NewLogger() *NewLog {
+	l := new(NewLog)
+	logger := log.NewWithOptions(os.Stderr, log.Options{
+			ReportTimestamp: true,
+			TimeFormat: time.TimeOnly,
+			Level: log.DebugLevel,
+		})
+
 	styles := log.DefaultStyles()
 
-	styles.Message = lipgloss.NewStyle().
-	Bold(true).
-	Padding(0, 1, 0, 1).
-	Background(lipgloss.Color("192")).
-	Foreground(lipgloss.Color("0"))
+	styles.Levels[SuccessLevel] = lipgloss.NewStyle().
+		SetString("SUCCESS").
+		Bold(true).
+		MaxWidth(4).
+		Foreground(lipgloss.Color("85"))
 
+	styles.Levels[ImportantWarnLevel] = lipgloss.NewStyle().
+		SetString("WARN").
+		Bold(true).
+		MaxWidth(4).
+		Foreground(lipgloss.Color("192"))
 
-	Logger.SetStyles(styles)
+	logger.SetStyles(styles)
 
-	Logger.Warn(msg)
-	
-	styles.Message = lipgloss.NewStyle().
-	UnsetBold().
-	UnsetBackground()
+	l.Logger = logger
+
+	return l
 }
+
+var Logger = NewLogger()
