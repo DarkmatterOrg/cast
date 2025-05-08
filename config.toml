@@ -8,5 +8,4 @@ insult = false
 [modules]
 # Enables experimental features, use at your own risk
 # default: false
-experimentals = false 
-horizon = false
+experimentals = false

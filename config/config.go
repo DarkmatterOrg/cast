@@ -8,7 +8,6 @@ import (
 )
 
 type Modules struct {
-	Horizon bool `toml:"horizon"`
 	Experimental bool `toml:"experimental"`
 }
 

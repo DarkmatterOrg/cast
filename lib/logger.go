@@ -11,6 +11,7 @@ import (
 var Logger = log.NewWithOptions(os.Stderr, log.Options{
 	ReportTimestamp: true,
 	TimeFormat: time.TimeOnly,
+	Level: log.DebugLevel,
 })
 
 func ImportantWarn(msg string) {
