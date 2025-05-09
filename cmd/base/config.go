@@ -1,4 +1,4 @@
-package cmd
+package base
 
 import (
 	"cast/config"
@@ -6,14 +6,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var configCmd = &cobra.Command{
+var ConfigCmd = &cobra.Command{
 	Use:   "config",
+	GroupID: "base",
 	Short: "Show the location of the config",
 	Run: func(cmd *cobra.Command, args []string) {
 		config.FindConfig()
 	},
-}
-
-func init() {
-	RootCmd.AddCommand(configCmd)
 }

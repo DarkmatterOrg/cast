@@ -1,4 +1,4 @@
-package cmd
+package base
 
 import (
 	"cast/components"
@@ -14,8 +14,9 @@ var (
 	enableFlag  bool
 	disableFlag bool
 
-	passwordFeedbackCmd = &cobra.Command{
+	PasswordFeedbackCmd = &cobra.Command{
 		Use:   "pwd-fdbk",
+		GroupID: "base",
 		Short: "Toggles password prompt feedback in terminal, where sudo password prompts will display asterisks when enabled",
 		Run: func(cmd *cobra.Command, args []string) {
 			if !utils.IsRoot() {
@@ -46,9 +47,7 @@ var (
 )
 
 func init() {
-	passwordFeedbackCmd.Flags().BoolVar(&enableFlag, "enable", false, "Enables password feedback")
-	passwordFeedbackCmd.Flags().BoolVar(&disableFlag, "disable", false, "Disables password feedback")
-	passwordFeedbackCmd.MarkFlagsOneRequired("enable", "disable")
-
-	RootCmd.AddCommand(passwordFeedbackCmd)
+	PasswordFeedbackCmd.Flags().BoolVar(&enableFlag, "enable", false, "Enables password feedback")
+	PasswordFeedbackCmd.Flags().BoolVar(&disableFlag, "disable", false, "Disables password feedback")
+	PasswordFeedbackCmd.MarkFlagsOneRequired("enable", "disable")
 }

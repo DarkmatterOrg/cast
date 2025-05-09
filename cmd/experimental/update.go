@@ -1,8 +1,6 @@
 package experimental
 
 import (
-	"cast/cmd"
-	"cast/config"
 	"cast/lib"
 	"os"
 	"os/exec"
@@ -11,7 +9,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var updateCmd = &cobra.Command{
+var UpdateCmd = &cobra.Command{
 	Use:   "update",
 	GroupID: "experimental",
 	Short: "Update system",
@@ -31,10 +29,4 @@ var updateCmd = &cobra.Command{
 			lib.Logger.Fatal("Could not find a supported package manager")
 		}
 	},
-}
-
-func init() {
-	if config.Config.Modules.Experimentals {
-		cmd.RootCmd.AddCommand(updateCmd)
-	}
 }

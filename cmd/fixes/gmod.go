@@ -1,7 +1,6 @@
 package fixes
 
 import (
-	"cast/cmd"
 	"cast/lib"
 	"os"
 	"os/exec"
@@ -11,7 +10,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var gmodCmd = &cobra.Command{
+var GmodCmd = &cobra.Command{
 	Use:   "gmod",
 	Short: "Patch GMod's 64-bit beta to work properly on Linux (https://github.com/solsticegamestudios/GModCEFCodecFix)",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -48,8 +47,4 @@ var gmodCmd = &cobra.Command{
 		utils.StopSpinner()
 		lib.Logger.Success("Fixed gmod")
 	},
-}
-
-func init() {
-	cmd.FixCmd.AddCommand(gmodCmd)
 }

@@ -1,6 +1,9 @@
 package cmd
 
 import (
+	"cast/cmd/base"
+	"cast/cmd/experimental"
+	"cast/cmd/umbra"
 	"cast/config"
 	"cast/lib"
 	"fmt"
@@ -11,7 +14,7 @@ import (
 )
 
 var (
-	RootCmd = &cobra.Command{
+	rootCmd = &cobra.Command{
 		Use:   "cast",
 		Short: "Cast is a swiss army knife.",
 		Long:  "Go Cast Go is a swiss army knife, usable on any Distro.",
@@ -28,24 +31,33 @@ func init() {
 	config.LoadConfig()
 	// RootCmd.Root().CompletionOptions.DisableDefaultCmd = true
 	errorTitle := color.New(color.FgRed, color.Bold).SprintFunc()
-	RootCmd.SetErrPrefix(errorTitle("ERROR"))
+	rootCmd.SetErrPrefix(errorTitle("ERROR"))
+
+	rootCmd.AddGroup(&cobra.Group{ID: "base", Title: "Base Commands"})
+	rootCmd.AddCommand(base.VersionCmd)
+	rootCmd.AddCommand(base.PasswordFeedbackCmd)
+	rootCmd.AddCommand(base.ConfigCmd)
+	rootCmd.AddCommand(base.BiosCmd)
 
 
-	if config.Config.Modules.Experimentals {
-		RootCmd.AddGroup(&cobra.Group{ID: "experimental", Title: "Experimental"})
+	if config.Config.Modules.Experimental {
+		rootCmd.AddGroup(&cobra.Group{ID: "experimental", Title: "Experimental Commands"})
+		rootCmd.AddCommand(experimental.InstallCmd)
+		rootCmd.AddCommand(experimental.UpdateCmd)
 	}
 
 	if config.Config.Modules.Umbra {
-		RootCmd.AddGroup(&cobra.Group{ID: "umbra", Title: "Umbra"})
+		rootCmd.AddGroup(&cobra.Group{ID: "umbra", Title: "Umbra Commands"})
+		rootCmd.AddCommand(umbra.BitfocusCompanionCmd)
 	}
 
 	if config.Config.Modules.Fixes {
-		RootCmd.AddCommand(FixCmd)
+		rootCmd.AddCommand(FixCmd)
 	}
 }
 
 func Execute() {
-	if config.Config.Modules.Experimentals {
+	if config.Config.Modules.Experimental {
 		if config.Config.Insult {
 			lib.Logger.ImportantWarn("Either you're fucking stupid or just curious. Either way; experimental features are enabled, use at your own risk")
 		} else {
@@ -53,7 +65,7 @@ func Execute() {
 		}
 	}
 
-	if err := RootCmd.Execute(); err != nil {
+	if err := rootCmd.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}

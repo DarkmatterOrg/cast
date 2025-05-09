@@ -1,4 +1,4 @@
-package cmd
+package base
 
 import (
 	"cast/lib"
@@ -10,8 +10,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var biosCmd = &cobra.Command{
+var BiosCmd = &cobra.Command{
 	Use:   "bios",
+	GroupID: "base",
 	Short: "Boot into this device's BIOS/UEFI screen",
 	Run: func(cmd *cobra.Command, args []string) {
 		if !utils.PathExists("/sys/firmware/efi") {
@@ -39,8 +40,4 @@ var biosCmd = &cobra.Command{
 			}
 		}
 	},
-}
-
-func init() {
-	RootCmd.AddCommand(biosCmd)
 }

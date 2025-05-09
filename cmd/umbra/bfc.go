@@ -1,9 +1,7 @@
 package umbra
 
 import (
-	"cast/cmd"
 	"cast/cmd/umbra/bfc"
-	"cast/config"
 
 	"github.com/spf13/cobra"
 )
@@ -18,11 +16,7 @@ var BitfocusCompanionCmd = &cobra.Command{
 
 
 func init() {
-	if config.Config.Modules.Umbra {
-		cmd.RootCmd.AddCommand(BitfocusCompanionCmd)
-
-		BitfocusCompanionCmd.AddCommand(bfc.VolumeCmd)
-		BitfocusCompanionCmd.AddCommand(bfc.MuteCmd)
-		BitfocusCompanionCmd.AddCommand(bfc.UnmuteCmd)
-	}
+	BitfocusCompanionCmd.AddCommand(bfc.VolumeCmd)
+	BitfocusCompanionCmd.AddCommand(bfc.MuteCmd)
+	BitfocusCompanionCmd.AddCommand(bfc.UnmuteCmd)
 }

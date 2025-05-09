@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"cast/cmd/fixes"
+
 	"github.com/spf13/cobra"
 )
 
@@ -10,41 +12,34 @@ import (
 //! IF YOU WANT TO MAKE ONE SPECIFIC FOR A MODULE, IT GOES IN THE MODULE FOLDER (experimental/X/Y/Z) LIKE NORMAL.
 //! JUST BE SURE TO INIT WITH cmd.FixCmd.AddCommand()
 
-var (
-	FixCmd = &cobra.Command{
-		Use:   "fix",
-		Short: "Different fixes for various things",
-	}
+var FixCmd = &cobra.Command{
+	Use:   "fix",
+	GroupID: "base",
+	Short: "Different fixes for various things",
+}
 
-	// ATM THE FIXES FOR THESE DOESN'T REALLY WORK, WILL BE IN HERE FOR THE TIME BEING
+// ATM THE FIXES FOR THESE DOESN'T REALLY WORK, WILL BE IN HERE FOR THE TIME BEING
 
-	// fixDiscord = &cobra.Command{
-	// 	Use:   "discord",
-	// 	Short: "Fix Discord flatpak RPC",
-	// 	Run: func(cmd *cobra.Command, args []string) {
-	// 		fixRpc("com.discordapp.Discord", "discord", "Discord")
-	// 	},
-	// }
-
-	// fixVesktop = &cobra.Command{
-	// 	Use:   "vesktop",
-	// 	Short: "Fix Vesktop flatpak RPC",
-	// 	Run: func(cmd *cobra.Command, args []string) {
-	// 		fixRpc("dev.vencord.Vesktop", "vesktop", "Vesktop")
-	// 	},
-	// }
-)
-
-// func init() {
-// 	config.LoadConfig()
-
-// 	if config.Config.Modules.Fixes {
-// 		RootCmd.AddCommand(FixCmd)
-// 	}
-
-// 	// fixCmd.AddCommand(fixDiscord)
-// 	// fixCmd.AddCommand(fixVesktop)
+// fixDiscord = &cobra.Command{
+// 	Use:   "discord",
+// 	Short: "Fix Discord flatpak RPC",
+// 	Run: func(cmd *cobra.Command, args []string) {
+// 		fixRpc("com.discordapp.Discord", "discord", "Discord")
+// 	},
 // }
+
+// fixVesktop = &cobra.Command{
+// 	Use:   "vesktop",
+// 	Short: "Fix Vesktop flatpak RPC",
+// 	Run: func(cmd *cobra.Command, args []string) {
+// 		fixRpc("dev.vencord.Vesktop", "vesktop", "Vesktop")
+// 	},
+// }
+
+func init() {
+	FixCmd.AddCommand(fixes.GmodCmd)
+	FixCmd.AddCommand(fixes.ProtonHangCmd)
+}
 
 // func fixRpc(longClient string, shortClient string, prettyname string) {
 // 	configDir, err := os.UserConfigDir()

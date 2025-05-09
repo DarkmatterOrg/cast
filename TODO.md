@@ -1,5 +1,6 @@
-- update
-  Needs the other package managers
+- Experimentals
+  - Update command. Will use the distro's package manager to update the system
+  - Install command. Will use the distro's package manager to install a package
 - Umbra
   - For Arch, add the custom repo command
   - MCreator install command (If Arch then use the custom repo)
@@ -9,3 +10,4 @@
     - Unmute and mute mic
     - Change output device
     - Change input device
+- Sort the modules a bit better

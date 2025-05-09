@@ -1,14 +1,13 @@
 package fixes
 
 import (
-	"cast/cmd"
 	"cast/lib"
 	"os/exec"
 
 	"github.com/spf13/cobra"
 )
 
-var protonHangCmd = &cobra.Command{
+var ProtonHangCmd = &cobra.Command{
 	Use:   "proton-hang",
 	Short: "Kills all processes related to wine and proton.",
 	Long:  "Kills all processes related to wine and proton. This forces it to restart next time you launch the game (you might still have to press STOP in steam to kill the game binary)",
@@ -35,8 +34,4 @@ var protonHangCmd = &cobra.Command{
 
 		lib.Logger.Success("Fixed proton hang")
 	},
-}
-
-func init() {
-	cmd.FixCmd.AddCommand(protonHangCmd)
 }

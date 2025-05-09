@@ -8,7 +8,7 @@ import (
 )
 
 type Modules struct {
-	Experimentals bool `toml:"experimentals"`
+	Experimental bool `toml:"experimental"`
 	Fixes bool `toml:"fixes"`
 	Umbra bool `toml:"umbra"`
 }
