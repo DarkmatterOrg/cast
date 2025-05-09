@@ -1,8 +1,7 @@
 package bfc
 
 import (
-	"cast/config"
-	"cast/lib"
+	"cast/util"
 	"fmt"
 	"os"
 	"os/exec"
@@ -21,11 +20,11 @@ var (
 		Example: "cast bfc volume --increase --amount 10",
 		Run: func(cmd *cobra.Command, args []string) {
 			if increaseFlag && decreaseFlag {
-				if config.Config.Insult {
-					lib.Logger.Warn("You can't use both --increase and --decrease at the same time you fucking moron!")
+				if util.Config.Insult {
+					util.Logger.Warn("You can't use both --increase and --decrease at the same time you fucking moron!")
 					os.Exit(0)
 				} else {
-					lib.Logger.Warn("You can't use both --increase and --decrease at the same time.")
+					util.Logger.Warn("You can't use both --increase and --decrease at the same time.")
 					os.Exit(0)
 				}
 			}
@@ -34,7 +33,7 @@ var (
 				cmdToRun := exec.Command("pactl", "set-sink-volume", "@DEFAULT_SINK@", fmt.Sprintf("+%d%%", amountFlag))
 
 				if err := cmdToRun.Run(); err != nil {
-					lib.Logger.Fatal("Failed to increase volume", "err", err)
+					util.Logger.Fatal("Failed to increase volume", "err", err)
 				}
 			}
 
@@ -42,7 +41,7 @@ var (
 				cmdToRun := exec.Command("pactl", "set-sink-volume", "@DEFAULT_SINK@", fmt.Sprintf("-%d%%", amountFlag))
 
 				if err := cmdToRun.Run(); err != nil {
-					lib.Logger.Fatal("Failed to decrease volume", "err", err)
+					util.Logger.Fatal("Failed to decrease volume", "err", err)
 				}
 			}
 		},

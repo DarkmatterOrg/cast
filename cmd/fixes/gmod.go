@@ -1,7 +1,7 @@
 package fixes
 
 import (
-	"cast/lib"
+	"cast/util"
 	"os"
 	"os/exec"
 	"time"
@@ -16,35 +16,35 @@ var GmodCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		utils.StartSpinner()
 
-		lib.Logger.Info("Creating /tmp/patch-gmod")
+		util.Logger.Info("Creating /tmp/patch-gmod")
 		if err := os.MkdirAll("/tmp/patch-gmod", os.ModePerm); err != nil {
-			lib.Logger.Fatal("Failed to create /tmp/patch-gmod", "err", err)
+			util.Logger.Fatal("Failed to create /tmp/patch-gmod", "err", err)
 		}
 
-		lib.Logger.Info("Downloading the gmod patch")
+		util.Logger.Info("Downloading the gmod patch")
 		cmdToRun := exec.Command("sh", "-c", "wget $(curl -s https://api.github.com/repos/solsticegamestudios/GModCEFCodecFix/releases/latest | jq -r '.assets[] | select(.name | test(\"GModCEFCodecFix-Linux\")) | .browser_download_url') -P /tmp/patch-gmod")
 		if err := cmdToRun.Run(); err != nil {
-			lib.Logger.Fatal("Failed to get the gmod patch", "err", err)
+			util.Logger.Fatal("Failed to get the gmod patch", "err", err)
 		}
 
-		lib.Logger.Info("Giving the patch run permissions")
+		util.Logger.Info("Giving the patch run permissions")
 		cmdToRun = exec.Command("chmod", "+x", "/tmp/patch-gmod/GModCEFCodecFix-Linux")
 		if err := cmdToRun.Run(); err != nil {
-			lib.Logger.Fatal("Failed to give the patch run permissions", "err", err)
+			util.Logger.Fatal("Failed to give the patch run permissions", "err", err)
 		}
 
-		lib.Logger.Info("Patching gmod")
+		util.Logger.Info("Patching gmod")
 		cmdToRun = exec.Command("/tmp/patch-gmod/GModCEFCodecFix-Linux")
 		if err := cmdToRun.Run(); err != nil {
-			lib.Logger.Fatal("Failed to run the patch", "err", err)
+			util.Logger.Fatal("Failed to run the patch", "err", err)
 		}
 
 		time.Sleep(4 * time.Second)
 
-		lib.Logger.Info("Removing the patch")
+		util.Logger.Info("Removing the patch")
 		os.RemoveAll("/tmp/patch-gmod")
 
 		utils.StopSpinner()
-		lib.Logger.Success("Fixed gmod")
+		util.Logger.Success("Fixed gmod")
 	},
 }

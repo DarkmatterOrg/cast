@@ -1,7 +1,7 @@
 package bfc
 
 import (
-	"cast/lib"
+	"cast/util"
 	"os/exec"
 
 	"github.com/spf13/cobra"
@@ -14,7 +14,7 @@ var UnmuteCmd = &cobra.Command{
 		cmdToRun := exec.Command("pactl", "set-sink-mute", "@DEFAULT_SINK@", "0")
 
 		if err := cmdToRun.Run(); err != nil {
-			lib.Logger.Fatal("Failed to unmute", "err", err)
+			util.Logger.Fatal("Failed to unmute", "err", err)
 		}
 	},
 }

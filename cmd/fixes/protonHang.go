@@ -1,7 +1,7 @@
 package fixes
 
 import (
-	"cast/lib"
+	"cast/util"
 	"os/exec"
 
 	"github.com/spf13/cobra"
@@ -28,10 +28,10 @@ var ProtonHangCmd = &cobra.Command{
 
 		for _, core := range protonCore {
 			if err := exec.Command("killall", "-9", core); err != nil {
-				lib.Logger.Warn("Was unable to kill: " + core)
+				util.Logger.Warn("Was unable to kill: " + core)
 			}
 		}
 
-		lib.Logger.Success("Fixed proton hang")
+		util.Logger.Success("Fixed proton hang")
 	},
 }

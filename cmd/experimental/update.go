@@ -1,7 +1,7 @@
 package experimental
 
 import (
-	"cast/lib"
+	"cast/util"
 	"os"
 	"os/exec"
 
@@ -23,10 +23,10 @@ var UpdateCmd = &cobra.Command{
 			cmdToRun.Stderr = os.Stderr
 
 			if err := cmdToRun.Run(); err != nil {
-				lib.Logger.Fatal("Failed to update system", "err", err)
+				util.Logger.Fatal("Failed to update system", "err", err)
 			}
 		} else {
-			lib.Logger.Fatal("Could not find a supported package manager")
+			util.Logger.Fatal("Could not find a supported package manager")
 		}
 	},
 }

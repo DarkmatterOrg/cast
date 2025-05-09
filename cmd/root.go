@@ -4,8 +4,7 @@ import (
 	"cast/cmd/base"
 	"cast/cmd/experimental"
 	"cast/cmd/umbra"
-	"cast/config"
-	"cast/lib"
+	"cast/util"
 	"fmt"
 	"os"
 
@@ -28,7 +27,7 @@ var (
 )
 
 func init() {
-	config.LoadConfig()
+	util.LoadConfig()
 	// RootCmd.Root().CompletionOptions.DisableDefaultCmd = true
 	errorTitle := color.New(color.FgRed, color.Bold).SprintFunc()
 	rootCmd.SetErrPrefix(errorTitle("ERROR"))
@@ -40,28 +39,28 @@ func init() {
 	rootCmd.AddCommand(base.BiosCmd)
 
 
-	if config.Config.Modules.Experimental {
+	if util.Config.Modules.Experimental {
 		rootCmd.AddGroup(&cobra.Group{ID: "experimental", Title: "Experimental Commands"})
 		rootCmd.AddCommand(experimental.InstallCmd)
 		rootCmd.AddCommand(experimental.UpdateCmd)
 	}
 
-	if config.Config.Modules.Umbra {
+	if util.Config.Modules.Umbra {
 		rootCmd.AddGroup(&cobra.Group{ID: "umbra", Title: "Umbra Commands"})
 		rootCmd.AddCommand(umbra.BitfocusCompanionCmd)
 	}
 
-	if config.Config.Modules.Fixes {
+	if util.Config.Modules.Fixes {
 		rootCmd.AddCommand(FixCmd)
 	}
 }
 
 func Execute() {
-	if config.Config.Modules.Experimental {
-		if config.Config.Insult {
-			lib.Logger.ImportantWarn("Either you're fucking stupid or just curious. Either way; experimental features are enabled, use at your own risk")
+	if util.Config.Modules.Experimental {
+		if util.Config.Insult {
+			util.Logger.ImportantWarn("Either you're fucking stupid or just curious. Either way; experimental features are enabled, use at your own risk")
 		} else {
-			lib.Logger.ImportantWarn("Experimental features are enabled, use at your own risk")
+			util.Logger.ImportantWarn("Experimental features are enabled, use at your own risk")
 		}
 	}
 

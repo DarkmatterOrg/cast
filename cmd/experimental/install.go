@@ -1,7 +1,7 @@
 package experimental
 
 import (
-	"cast/lib"
+	"cast/util"
 	"os"
 	"os/exec"
 
@@ -18,38 +18,38 @@ var InstallCmd = &cobra.Command{
 
 		if utils.IsCmdInstalled("pacman") {
 			if utils.IsCmdInstalled("yay") {
-				lib.Logger.Info("Installing with yay")
+				util.Logger.Info("Installing with yay")
 				cmdToRun := exec.Command("yay", "-S", args[0])
 
 				cmdToRun.Stdout = os.Stdout
 				cmdToRun.Stderr = os.Stderr
 
 				if err := cmdToRun.Run(); err != nil {
-					lib.Logger.Fatal("Failed to install package", "err", err)
+					util.Logger.Fatal("Failed to install package", "err", err)
 				}
 			} else if utils.IsCmdInstalled("paru") {
-				lib.Logger.Info("Installing with paru")
+				util.Logger.Info("Installing with paru")
 				cmdToRun := exec.Command("paru", "-S", args[0])
 				
 				cmdToRun.Stdout = os.Stdout
 				cmdToRun.Stderr = os.Stderr
 
 				if err := cmdToRun.Run(); err != nil {
-					lib.Logger.Fatal("Failed to install package", "err", err)
+					util.Logger.Fatal("Failed to install package", "err", err)
 				}
 			} else {
-				lib.Logger.Info("Installing with pacman")
+				util.Logger.Info("Installing with pacman")
 				cmdToRun := exec.Command("sudo", "pacman", "-S", args[0])
 				
 				cmdToRun.Stdout = os.Stdout
 				cmdToRun.Stderr = os.Stderr
 
 				if err := cmdToRun.Run(); err != nil {
-					lib.Logger.Fatal("Failed to install package", "err", err)
+					util.Logger.Fatal("Failed to install package", "err", err)
 				}
 			}
 		} else {
-			lib.Logger.Fatal("Could not find a supported package manager")
+			util.Logger.Fatal("Could not find a supported package manager")
 		}
 	},
 }

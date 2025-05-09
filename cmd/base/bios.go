@@ -1,7 +1,7 @@
 package base
 
 import (
-	"cast/lib"
+	"cast/util"
 	"os"
 	"os/exec"
 
@@ -16,7 +16,7 @@ var BiosCmd = &cobra.Command{
 	Short: "Boot into this device's BIOS/UEFI screen",
 	Run: func(cmd *cobra.Command, args []string) {
 		if !utils.PathExists("/sys/firmware/efi") {
-			lib.Logger.Info("Rebooting to legacy BIOS from OS is not supported")
+			util.Logger.Info("Rebooting to legacy BIOS from OS is not supported")
 			os.Exit(0)
 		} else {
 			var confirm bool
@@ -27,7 +27,7 @@ var BiosCmd = &cobra.Command{
 				Value(&confirm)
 
 			if err := confirmation.Run(); err != nil {
-				lib.Logger.Fatal("Failed to run the confirmation dialog", "err", err)
+				util.Logger.Fatal("Failed to run the confirmation dialog", "err", err)
 			}
 			
 			if confirm {
