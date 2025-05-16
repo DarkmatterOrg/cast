@@ -1,4 +1,20 @@
-- setup-new-system
-  Flag or other argument should ask for path to a file with a list of apps wanting to be installed
-- update
-  Needs the other package managers
+- Base
+  - Self update command
+    - Check what version is installed and where (incase user placed it somewhere else)
+    - Download the latest version
+    - Replace the current binary with the new one
+  - System age (years months days hours minutes seconds)
+- Experimentals
+  - Update command. Will use the distro's package manager to update the system
+  - Install command. Will use the distro's package manager to install a package
+- Umbra
+  - For Arch, add the custom repo command
+  - MCreator install command (If Arch then use the custom repo)
+  - setup-new-system
+    - Flag or other argument should ask for path to a file with a list of apps wanting to be installed
+    - Flag for base distro (--arch --debian etc)
+  - command to deal with Bitfocus companion
+    - Unmute and mute mic
+    - Change output device
+    - Change input device
+- Horizon

@@ -1,0 +1,30 @@
+# This is the config file for cast
+# It is located at /etc/cast/config.toml
+
+# Self explanatory, will curse and insult you if enabled
+# default: false
+insult = false
+
+[modules]
+# Enables experimental features, use at your own risk
+# default: false
+experimental = false
+# Various fixes for different applications
+# default: false
+fixes = false
+
+# 
+# default: false
+[modules.horizon]
+enabled = false
+# Commands for distrobox
+# default: true
+distrobox = true
+
+# Just various commands I use
+# default: false
+[modules.umbra]
+enabled = false
+# Bitfocus Companion
+# default: true
+bfc = true
