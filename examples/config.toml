@@ -29,4 +29,5 @@ enabled = false
 # default: true
 bfc = true
 # Some commands that comebine some git commands
+# default: true
 git = true
