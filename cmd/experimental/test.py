@@ -2,7 +2,6 @@ import typer
 
 from rich import print
 from rich.panel import Panel
-
 app = typer.Typer()
 
 @app.command(rich_help_panel="Experimentals")
@@ -12,5 +11,4 @@ def test():
 
   Will most likely do nothing at all
   """
-
   print(Panel("Hello, [red]World[/red]!"))
