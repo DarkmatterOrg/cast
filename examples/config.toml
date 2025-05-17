@@ -28,3 +28,5 @@ enabled = false
 # Bitfocus Companion
 # default: true
 bfc = true
+# Some commands that comebine some git commands
+git = true
