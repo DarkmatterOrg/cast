@@ -20,4 +20,3 @@
 - Horizon
 - Bugs
   - the version command doesn't actually work when CLI is built and ran outside of project directory
-  - Completions are not working when using pyinstaller
