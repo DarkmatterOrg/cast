@@ -3,7 +3,7 @@ import os
 
 from typing import Annotated
 from utils.logger import warn, success, notice
-from utils.isRoot import isRoot
+from utils.checkIfRoot import checkIfRoot
 
 
 app = typer.Typer()
@@ -13,9 +13,7 @@ def pwd_fdbk(toggle: Annotated[bool, typer.Option("--enable/--disable", help="En
     """
     Toggles password prompt feedback in terminal, where sudo password prompts will display asterisks when enabled
     """
-    if not isRoot():
-      warn("You need to run this command with sudo")
-      raise typer.Exit()
+    checkIfRoot()
     
     pwfeedbackPath = "/etc/sudoers.d/pwfeedback"
 

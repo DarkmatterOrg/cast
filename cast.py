@@ -11,7 +11,7 @@ from cmd.umbra import app as umbra
 from cmd.umbra.bfc import app as bfc
 
 config = load_config()
-app = typer.Typer()
+app = typer.Typer(add_completion=False)
 
 app.add_typer(base)
 

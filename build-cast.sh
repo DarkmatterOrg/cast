@@ -7,6 +7,6 @@ pyinstaller --onefile \
   --collect-submodules tomli \
   --name cast \
   --path .venv/lib/python3.13/site-packages \
-  main.py
+  cast.py
 
 # pip install --no-binary tomli tomli

@@ -18,3 +18,4 @@
     - Change output device
     - Change input device
 - Horizon
+- Bugs
