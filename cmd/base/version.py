@@ -1,5 +1,6 @@
 import typer
-import tomli
+
+from castValues import VERSION
 
 app = typer.Typer()
 
@@ -8,6 +9,4 @@ def version():
     """
     Print the version number of cast
     """
-    with open("pyproject.toml", "rb") as f:
-        pyproject = tomli.load(f)
-        typer.echo(f"{pyproject["project"]["version"]}")
+    typer.echo(VERSION)

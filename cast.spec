@@ -7,7 +7,7 @@ hiddenimports += collect_submodules('tomli')
 
 
 a = Analysis(
-    ['main.py'],
+    ['cast.py'],
     pathex=['.venv/lib/python3.13/site-packages'],
     binaries=[],
     datas=[],
