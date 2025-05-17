@@ -3,7 +3,7 @@ import shutil
 import subprocess
 import os
 
-from utils.logger import info, notice, error
+from utils.logger import info, notice, error, success
 from rich.console import Console
 
 app = typer.Typer()
@@ -18,9 +18,12 @@ def update():
 
   if shutil.which("pacman"):
     try:
-      os.system("sudo pacman -Syyu --noconfirm")
+      with console.status("Updating..."):
+        subprocess.getoutput("pacman -Syyu --noconfirm")
     except:
       error("Failed to update system")
       raise typer.Exit(code=1)
+    else:
+      success("System updated")
   else:
     notice("Could not find supported package manager")
