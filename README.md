@@ -2,7 +2,7 @@
 
 A swiss army knife for casting spells
 
-**This is a WIP**
+**This is WIP**
 
 ## Installation
 
@@ -14,8 +14,15 @@ A swiss army knife for casting spells
 
 ### Other
 
-```bash
+#### Prerequisites
 
+- pyinstaller
+- Having done Getting Started
+
+```bash
+./build-cast.sh
+
+sudo mv dist/cast /usr/bin
 ```
 
 ## Usage
