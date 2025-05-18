@@ -3,7 +3,9 @@ import shutil
 import os
 import subprocess
 
-from utils.logger import info, notice, error, success
+from typing_extensions import Annotated
+
+from utils.logger import info, notice, error, success, warn
 from utils.checkIfRoot import checkIfRoot
 from rich.console import Console
 
@@ -11,7 +13,7 @@ app = typer.Typer()
 console = Console()
 
 @app.command(rich_help_panel="Experimentals")
-def install(pkg: str):
+def install(pkg: str, verbose: Annotated[bool, typer.Option("-V", "--verbose", help="Show more output", show_default=False)] = None):
   """
   Installs a package
   """
@@ -23,8 +25,15 @@ def install(pkg: str):
     if shutil.which("yay"):
       info("Installing with yay")
       try:
-        with console.status("Installing..."):
-          subprocess.getoutput(f"yay -Syy --noconfirm {pkg}")
+        if verbose:
+          os.system(f"yay -Syy --noconfirm {pkg}")
+        else:
+          with console.status("Installing..."):
+            output = subprocess.getoutput(f"yay -Syy --noconfirm {pkg}")
+
+            if f"No AUR package found for {pkg}" in output or f"error: target not found: '{pkg}'" in output:
+              warn(f"No package found for {pkg}")
+              raise typer.Exit(code=1)
       except:
         error(f"Failed to install {pkg}")
         raise typer.Exit(code=1)
@@ -33,8 +42,15 @@ def install(pkg: str):
     elif shutil.which("paru"):
       info("Installing with paru")
       try:
-        with console.status("Installing..."):
-          subprocess.getoutput(f"paru -Syy --noconfirm {pkg}")
+        if verbose:
+          os.system(f"paru -Syy --noconfirm {pkg}")
+        else:
+          with console.status("Installing..."):
+            output = subprocess.getoutput(f"paru -Syy --noconfirm {pkg}")
+
+            if f"No AUR package found for {pkg}" in output or f"error: target not found: '{pkg}'" in output:
+              warn(f"No package found for {pkg}")
+              raise typer.Exit(code=1)
       except:
         error(f"Failed to install {pkg}")
         raise typer.Exit(code=1)
@@ -43,8 +59,15 @@ def install(pkg: str):
     else:
       info("Installing with pacman")
       try:
-        with console.status("Installing..."):
-          subprocess.getoutput(f"pacman -Syy --noconfirm {pkg}")
+        if verbose:
+          os.system(f"pacman -Syy --noconfirm {pkg}")
+        else:
+          with console.status("Installing..."):
+            output =subprocess.getoutput(f"pacman -Syy --noconfirm {pkg}")
+
+            if f"No AUR package found for {pkg}" in output or f"error: target not found: '{pkg}'" in output:
+              warn(f"No package found for {pkg}")
+              raise typer.Exit(code=1)
       except:
         error(f"Failed to install {pkg}")
         raise typer.Exit(code=1)
