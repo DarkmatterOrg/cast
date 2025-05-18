@@ -10,7 +10,6 @@
     - Add support for more package managers
 - Experimentals
   - Update command. Will use the distro's package manager to update the system
-  - Install command. Will use the distro's package manager to install a package
 - Umbra
   - For Arch, add the custom repo command
   - MCreator install command (If Arch then use the custom repo)
