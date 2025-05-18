@@ -1,7 +1,7 @@
 NAME = "cast"
 LICENSE = "MIT"
-VERSION = "3.0.0"
-DESCRIPTION = "A swiss army knife for casting spells"
+VERSION = "3.1.0"
+DESCRIPTION = "A not so small utility for Linux."
 AUTHORS = [
   {
     "name": "pupyrinth",

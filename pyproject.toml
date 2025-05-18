@@ -1,6 +1,6 @@
 [project]
 name = "cast"
-version = "3.0.0"
+version = "3.1.0"
 description = "A swiss army knife for casting spells"
 authors = [
     {name = "pupyrinth",email = "contact@pupyrinth.dev"}
