@@ -1,5 +1,5 @@
 # This is the config file for cast
-# It is located at /etc/cast/config.toml
+# It is located at /home/USER/.config/cast/config.toml
 
 # Self explanatory, will curse and insult you if enabled
 # default: false
