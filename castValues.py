@@ -5,6 +5,7 @@ DESCRIPTION = "A not so small utility for Linux."
 AUTHORS = [
   {
     "name": "pupyrinth",
-    "email": "contact@pupyrinth.dev"
+    "email": "contact@pupyrinth.dev",
+    "website": "https://pupyrinth.dev"
   }
 ]

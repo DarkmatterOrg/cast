@@ -1,4 +1,5 @@
 - Base
+  - Authors command to show the authors of the project and their websites
   - self
     - Self update command
       - Check what version is installed and where (incase user placed it somewhere else)
@@ -20,7 +21,3 @@
     - Unmute and mute mic
     - Change output device
     - Change input device
-- Horizon
-  - .
-- Bugs
-  - .
