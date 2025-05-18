@@ -9,8 +9,6 @@
 - Package Manager
   - Search
     - Add support for more package managers
-- Experimentals
-  - Update command. Will use the distro's package manager to update the system
 - Umbra
   - For Arch, add the custom repo command
   - MCreator install command (If Arch then use the custom repo)
