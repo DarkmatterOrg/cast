@@ -23,7 +23,7 @@ def remove(pkg: str, verbose: Annotated[bool, typer.Option("-v", "--verbose", he
   checkIfRoot()
 
   foundPM = False
-  supportedPMs = ["pacman", "apt", "apk", "dnf", "emerge", "xbps-install", "scratch", "eopkg"]
+  supportedPMs = ["pacman", "apt", "apk", "dnf", "emerge", "xbps-remove", "scratch", "eopkg"]
 
   for pm in supportedPMs:
     if isCmdInstalled(pm):
@@ -39,7 +39,7 @@ def remove(pkg: str, verbose: Annotated[bool, typer.Option("-v", "--verbose", he
           removePkg(f"dnf remove -y {pkg}", pkg, verbose)
         case "emerge":
           removePkg(f"emerge {pkg}", pkg, verbose)
-        case "xbps-install":
+        case "xbps-remove":
           removePkg(f"xbps-remove -y {pkg}", pkg, verbose)
         case "scratch":
           removePkg(f"scratch remove {pkg}", pkg, verbose)
