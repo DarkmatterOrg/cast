@@ -4,7 +4,7 @@ import shutil
 
 from typing_extensions import Annotated
 from utils.logger import warn
-from utils.config import load_config
+from utils.config import loadConfig
 
 app = typer.Typer()
 
@@ -19,7 +19,7 @@ def dbox_ubuntu(pkgs: Annotated[str, typer.Option("--pkgs", help="Comma separate
   """
 
   if shutil.which("distrobox") is None:
-    config = load_config()
+    config = loadConfig()
 
     if config["insult"]:
       warn("How the fuck do you expect me to do this when you don't even have distrobox installed")

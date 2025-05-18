@@ -1,6 +1,6 @@
 import typer
 
-from utils.config import load_config
+from utils.config import loadConfig
 from utils.logger import importantWarn
 
 from cmd.base import app as base
@@ -10,7 +10,7 @@ from cmd.horizon import app as horizon
 from cmd.umbra import app as umbra
 from cmd.umbra.bfc import app as bfc
 
-config = load_config()
+config = loadConfig()
 app = typer.Typer(add_completion=False, rich_markup_mode="rich")
 
 app.add_typer(base)

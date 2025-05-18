@@ -1,7 +1,7 @@
 import typer
 
 from rich.console import Console
-from utils.config import load_config,CONFIG_PATH
+from utils.config import loadConfig,CONFIG_PATH
 from utils.logger import info
 
 app = typer.Typer()
@@ -12,7 +12,7 @@ def config():
   """
   Show the current configuration and where it's located
   """
-  config = load_config()
+  config = loadConfig()
   console.print(config)
 
   if CONFIG_PATH.exists():
