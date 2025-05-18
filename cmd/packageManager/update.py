@@ -9,7 +9,7 @@ from rich.console import Console
 app = typer.Typer()
 console = Console()
 
-@app.command(rich_help_panel="Experimentals")
+@app.command(rich_help_panel="Package Manager")
 def update():
   """
   Update system
