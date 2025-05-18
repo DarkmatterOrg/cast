@@ -13,6 +13,9 @@ console = Console()
 def search(pkg: str):
   """
   Search for a package
+
+  Example:
+  [blue on black]cast search firefox[/blue on black]
   """
   #TODO Support for more package managers
 

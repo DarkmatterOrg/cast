@@ -9,6 +9,9 @@ app = typer.Typer()
 def gglobal(name: str, email: str):
   """
   Git global config
+
+  Example:
+  [blue on black]cast gglobal John example@example.com[/blue on black]
   """
   info("Setting name...")
   os.system(f"git config --global user.name \"{name}\"")

@@ -14,6 +14,9 @@ console = Console()
 def remove(pkg: str):
   """
   Removes a package
+
+  Example:
+  [blue on black]cast remove firefox[/blue on black]
   """
   #TODO Support for more package managers
 

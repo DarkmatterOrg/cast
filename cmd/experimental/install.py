@@ -16,6 +16,9 @@ console = Console()
 def install(pkg: str, verbose: Annotated[bool, typer.Option("-V", "--verbose", help="Show more output", show_default=False)] = None):
   """
   Installs a package
+
+  Example:
+  [blue on black]cast install firefox[/blue on black]
   """
   #TODO Support for more package managers
 

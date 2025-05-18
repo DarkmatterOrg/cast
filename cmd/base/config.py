@@ -10,7 +10,7 @@ console = Console()
 @app.command(rich_help_panel="Base")
 def config():
   """
-  Show the location of the config
+  Show the current configuration and where it's located
   """
   config = load_config()
   console.print(config)

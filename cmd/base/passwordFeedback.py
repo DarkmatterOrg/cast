@@ -8,10 +8,13 @@ from utils.checkIfRoot import checkIfRoot
 
 app = typer.Typer()
 
-@app.command(rich_help_panel="Base")
+@app.command(rich_help_panel="Base", short_help="Toggle password feedback")
 def pwd_fdbk(toggle: Annotated[bool, typer.Option("--enable/--disable", help="Enable or disable password feedback", show_default=False)]):
     """
     Toggles password prompt feedback in terminal, where sudo password prompts will display asterisks when enabled
+
+    Example:
+    [blue on black]cast pwd_fdbk --enable[/blue on black]
     """
     checkIfRoot()
     

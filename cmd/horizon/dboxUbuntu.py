@@ -12,6 +12,10 @@ app = typer.Typer()
 def dbox_ubuntu(pkgs: Annotated[str, typer.Option("--pkgs", help="Comma separated list of packages to install")] = None):
   """
   Create a Ubuntu distrobox container
+
+  Examples:
+  [blue on black]cast dbox-ubuntu[/blue on black]
+  [blue on black]cast dbox-ubuntu --pkgs firefox,discord[/blue on black]
   """
 
   if shutil.which("distrobox") is None:

@@ -11,7 +11,7 @@ from utils.logger import info, success
 app = typer.Typer()
 console = Console()
 
-@app.command(rich_help_panel="Fixes")
+@app.command(rich_help_panel="Fixes", short_help="Patch GMod")
 def gmod():
   """
   Patch GMod's 64-bit beta to work properly on Linux (https://github.com/solsticegamestudios/GModCEFCodecFix)
