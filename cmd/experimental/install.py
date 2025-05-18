@@ -13,7 +13,7 @@ app = typer.Typer()
 console = Console()
 
 @app.command(rich_help_panel="Experimentals")
-def install(pkg: str, verbose: Annotated[bool, typer.Option("-V", "--verbose", help="Show more output", show_default=False)] = None):
+def install(pkg: str, verbose: Annotated[bool, typer.Option("-v", "--verbose", help="Show more output", show_default=False)] = None):
   """
   Installs a package
 
