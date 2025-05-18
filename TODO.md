@@ -5,6 +5,9 @@
       - Download the latest version
       - Replace the current binary with the new one
   - System age (years months days hours minutes seconds)
+- Package Manager
+  - Search
+    - Add support for more package managers
 - Experimentals
   - Update command. Will use the distro's package manager to update the system
   - Install command. Will use the distro's package manager to install a package

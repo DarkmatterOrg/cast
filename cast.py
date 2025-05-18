@@ -7,6 +7,7 @@ from cmd.base import app as base
 from cmd.experimental import app as experimental
 from cmd.fixes import app as fix
 from cmd.horizon import app as horizon
+from cmd.packageManager import app as packageManager
 from cmd.umbra import app as umbra
 from cmd.umbra.bfc import app as bfc
 
@@ -23,6 +24,9 @@ if config["modules"]["fixes"]:
 
 if config["modules"]["horizon"]["enabled"]:
   app.add_typer(horizon)
+
+if config["modules"]["packageManager"]:
+  app.add_typer(packageManager)
 
 if config["modules"]["umbra"]["enabled"]:
   app.add_typer(umbra)

@@ -12,6 +12,9 @@ experimental = false
 # Various fixes for different applications
 # default: false
 fixes = false
+# Package manager commands
+# default: false
+packageManager = false
 
 # 
 # default: false

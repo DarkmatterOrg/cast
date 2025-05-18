@@ -11,6 +11,7 @@ DEFAULT_CONFIG = {
   "modules": {
     "experimental": False,
     "fixes": False,
+    "packageManager": False,
     "horizon": {
       "enabled": False,
       "distrobox": True
