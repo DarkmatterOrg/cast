@@ -14,7 +14,7 @@ app = typer.Typer()
 @app.command(rich_help_panel="Base")
 def changelog():
   """
-  Get and print the changelog for the current version
+  Show the changelog for the current version
   """
   if VERSION < "3.0.0":
     warn("Changelog is only available for versions >= 3.0.0")
