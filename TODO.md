@@ -1,8 +1,9 @@
 - Base
-  - Self update command
-    - Check what version is installed and where (incase user placed it somewhere else)
-    - Download the latest version
-    - Replace the current binary with the new one
+  - self
+    - Self update command
+      - Check what version is installed and where (incase user placed it somewhere else)
+      - Download the latest version
+      - Replace the current binary with the new one
   - System age (years months days hours minutes seconds)
 - Experimentals
   - Update command. Will use the distro's package manager to update the system
