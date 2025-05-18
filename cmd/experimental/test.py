@@ -1,5 +1,6 @@
 import typer
 
+from utils.logger import info, notice, error, success, warn
 from rich import print
 from rich.panel import Panel
 app = typer.Typer()

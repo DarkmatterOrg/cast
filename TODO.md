@@ -20,3 +20,4 @@
     - Change input device
 - Horizon
 - Bugs
+- Move config location

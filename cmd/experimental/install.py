@@ -5,7 +5,7 @@ import subprocess
 
 from typing_extensions import Annotated
 
-from utils.logger import info, notice, error, success, warn
+from utils.logger import info, notice, error, success, warn, debug
 from utils.checkIfRoot import checkIfRoot
 from rich.console import Console
 
@@ -26,55 +26,42 @@ def install(pkg: str, verbose: Annotated[bool, typer.Option("-V", "--verbose", h
 
   if shutil.which("pacman"):
     if shutil.which("yay"):
-      info("Installing with yay")
-      try:
-        if verbose:
-          os.system(f"yay -Syy --noconfirm {pkg}")
-        else:
-          with console.status("Installing..."):
-            output = subprocess.getoutput(f"yay -Syy --noconfirm {pkg}")
-
-            if f"No AUR package found for {pkg}" in output or f"error: target not found: '{pkg}'" in output:
-              warn(f"No package found for {pkg}")
-              raise typer.Exit(code=1)
-      except:
-        error(f"Failed to install {pkg}")
-        raise typer.Exit(code=1)
-      else:
-        success(f"Installed {pkg}")
+      info("Using yay")
+      installPkgCmd(f"yay -Syy --noconfirm {pkg}", pkg, verbose, True)
     elif shutil.which("paru"):
-      info("Installing with paru")
-      try:
-        if verbose:
-          os.system(f"paru -Syy --noconfirm {pkg}")
-        else:
-          with console.status("Installing..."):
-            output = subprocess.getoutput(f"paru -Syy --noconfirm {pkg}")
-
-            if f"No AUR package found for {pkg}" in output or f"error: target not found: '{pkg}'" in output:
-              warn(f"No package found for {pkg}")
-              raise typer.Exit(code=1)
-      except:
-        error(f"Failed to install {pkg}")
-        raise typer.Exit(code=1)
-      else:
-        success(f"Installed {pkg}")
+      info("Using paru")
+      installPkgCmd(f"paru -Syy --noconfirm {pkg}", pkg, verbose)
     else:
-      info("Installing with pacman")
-      try:
-        if verbose:
-          os.system(f"pacman -Syy --noconfirm {pkg}")
-        else:
-          with console.status("Installing..."):
-            output =subprocess.getoutput(f"pacman -Syy --noconfirm {pkg}")
-
-            if f"No AUR package found for {pkg}" in output or f"error: target not found: '{pkg}'" in output:
-              warn(f"No package found for {pkg}")
-              raise typer.Exit(code=1)
-      except:
-        error(f"Failed to install {pkg}")
-        raise typer.Exit(code=1)
-      else:
-        success(f"Installed {pkg}")
+      info("Using pacman")
+      installPkgCmd(f"pacman -Syy --noconfirm {pkg}", pkg, verbose)
   else:
     notice("Could not find supported package manager")
+
+def archCheckNoPkg(pkg, output: str):
+  if f"No AUR package found for {pkg}" in output or f"error: target not found: '{pkg}'" in output:
+    warn(f"No package found for {pkg}")
+    raise typer.Exit(code=1)
+
+def installPkgCmd(cmdToRun, pkg: str, verbose: bool, isYay: bool = False):
+  try:
+    if verbose:
+      if isYay:
+        info("No realtime messages cause yay sucks, the output will be shown soon...")
+        output = subprocess.run(cmdToRun, shell=True, check=True, capture_output=True)
+        print(output.stdout.decode("utf-8"))
+        if f"No AUR package found for {pkg}" in output.stderr.decode("utf-8"):
+          raise Exception(output.stderr.decode("utf-8"))
+      else:
+        subprocess.run(cmdToRun, shell=True, check=True)
+    else:
+      with console.status(f"Installing {pkg}..."):
+        if isYay:
+          output = subprocess.run(cmdToRun, shell=True, check=True, capture_output=True)
+          if f"No AUR package found for {pkg}" in output.stderr.decode("utf-8"):
+            raise Exception(output.stderr.decode("utf-8"))
+        else:
+          subprocess.run(cmdToRun, stdout=open(os.devnull, "wb"), stderr=open(os.devnull, "wb"), shell=True, check=True)
+  except:
+    error(f"Failed to install {pkg}")
+  else:
+    success(f"Installed {pkg}")
