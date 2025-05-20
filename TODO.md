@@ -4,7 +4,6 @@
         * Check what version is installed and where (incase user placed it somewhere else)
         * Download the latest version
         * Replace the old binary with the new version
-    * System age ✅
 
 #### Package Manager
     * Search
@@ -20,3 +19,7 @@
         * Unmute and mute mic
         * Change output device
         * Change input device
+
+### Possible ideas
+    * Wrapper for ytdlp
+    * Twitch stuff like that one cli https://github.com/krathalan/wtwitch

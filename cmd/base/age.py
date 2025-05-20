@@ -1,18 +1,27 @@
+from typing import Annotated
+
 import typer
 import os
 
 from datetime import datetime
 from rich.console import Console
+from utils.logger import info
 
 app = typer.Typer()
 console = Console()
 
 @app.command(rich_help_panel="Base")
-def age():
+def age(
+        getEpoch: Annotated[bool, typer.Option("-g", "--getEpoch", help="Get the epoch time instead")] = None,
+        epoch: Annotated[int, typer.Option("-e", "--epoch", help="Get system age based on custom epoch", show_default=False)] = None
+        ):
   """
   Show the system's age
 
-  ~~Stolen~~ Taken from Alxhr0
+  [strike]Stolen[/strike] Taken from Alxhr0
+
+  Example:
+    [blue on black]cast age --epoch 1742944940[/blue on black]
   """
   if os.path.exists("/bedrock"):
       sysStat = os.stat("/home")
@@ -21,7 +30,12 @@ def age():
   else:
       sysStat = os.stat("/")
 
-  console.print(getInstallTime(sysStat.st_ctime))
+  if getEpoch:
+    info(int(sysStat.st_ctime))
+  elif epoch:
+      console.print(getInstallTime(epoch))
+  else:
+    console.print(getInstallTime(sysStat.st_ctime))
 
 def getInstallTime(installed_stamp: float) -> str:
     installed = datetime.fromtimestamp(installed_stamp)
