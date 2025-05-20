@@ -19,6 +19,7 @@
         * Unmute and mute mic
         * Change output device
         * Change input device
+    * Make the chall command in python instead?
 
 ### Possible ideas
     * Wrapper for ytdlp

@@ -6,7 +6,10 @@ import pwd
 from pathlib import Path
 from typing import Any, Dict
 
+from utils.logger import notice
+
 DEFAULT_CONFIG = {
+  "epoch": -1,
   "insult": False,
   "modules": {
     "experimental": False,
@@ -55,5 +58,6 @@ def loadConfig() -> Dict[str, Any]:
       config = deepMerge(config, user_config)
     except tomli.TOMLDecodeError as e:
       typer.echo(f"Error parsing config file: {e}", err=True)
+      notice("You most likely used the wrong type for a config value. Check the example if you're unsure")
       raise typer.Exit(code=1)
   return config

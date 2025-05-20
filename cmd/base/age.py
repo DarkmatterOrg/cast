@@ -6,6 +6,7 @@ import os
 from datetime import datetime
 from rich.console import Console
 from utils.logger import info
+from utils.config import loadConfig
 
 app = typer.Typer()
 console = Console()
@@ -30,10 +31,14 @@ def age(
   else:
       sysStat = os.stat("/")
 
+  config = loadConfig()
+
   if getEpoch:
     info(int(sysStat.st_ctime))
   elif epoch:
       console.print(getInstallTime(epoch))
+  elif not isinstance(config["epoch"], bool) and isinstance(config["epoch"], int) and config["epoch"] != -1:
+      console.print(getInstallTime(config["epoch"]))
   else:
     console.print(getInstallTime(sysStat.st_ctime))
 

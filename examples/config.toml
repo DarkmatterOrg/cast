@@ -1,6 +1,12 @@
 # This is the config file for cast
 # It is located at /home/USER/.config/cast/config.toml
 
+# Set the epoch time for the age command, so it uses this instead of the systems or without
+# having to use the flag each time
+# example = 1742944940
+# default = -1
+epoch = -1
+
 # Self explanatory, will curse and insult you if enabled
 # default: false
 insult = false
