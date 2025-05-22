@@ -8,6 +8,9 @@
 #### Package Manager
     * Search
         * Add support for more package managers
+    * Install
+        * Add support for adding custom copr stuff `--copr --coprUrlTHing --coprName` or something
+        * Flag to allow AUR?
 
 #### Umbra
     * For Arch, add the custom repo command
@@ -15,6 +18,9 @@
     * setup-new-system
         * Flag or other argument should ask for path to a file with a list of apps to be installed
         * Flag for base distro (--arch, --debian etc)
+        * The toml file for it should have different categories for things one would want
+            * Apps
+            * Commands wanting to be ran
     * command to deal with BitFocus companion
         * Unmute and mute mic
         * Change output device

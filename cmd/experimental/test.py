@@ -1,3 +1,5 @@
+import os
+
 import typer
 
 from utils.logger import info, notice, error, success, warn, debug

@@ -7,6 +7,9 @@ A not so small utility for Linux.
 
 **Work In Progress**
 
+## Environment Variables
+`CastIsDebug=false` Use EXPORT in terminal to set it to true or false.
+
 ## Installation
 
 ### Arch
